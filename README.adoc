@@ -168,11 +168,10 @@ You need a running *ElasticSearch* in docker. To achieve this run:
     $ docker run -d --name=elasticsearch --env 'discovery.type=single-node' docker.elastic.co/elasticsearch/elasticsearch:6.3.2
 
 If you want to handle attachment text extraction before indexing in ElasticSearch (this makes attachments searchable)
-and if you want to use all the JMAP search capabilities, you also need to start Tika:
+and if you want to use all the JMAP search capabilities, you also need to start Tika.
+See [Tika configuration documentation](http://james.apache.org/server/config-elasticsearch.html#Tika_Configuration) for more info.
 
     $ docker run -d --name=tika apache/tika:1.24
-
-You can find more explanation on the need of Tika in this page http://james.apache.org/server/config-elasticsearch.html
 
 We need to provide the key we will use for TLS. For obvious reasons, this is not provided in this git.
 
@@ -192,6 +191,7 @@ To run this container :
 Where :
 
 - HOSTNAME: is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
+- link to tika is only needed if you started tika earlier.
 
 Webadmin port binding is restricted to loopback as users are not authenticated by default on webadmin server. Thus you should avoid exposing it in production.
 Note that the above example assumes `127.0.0.1` is your loopback interface for convenience but you should change it if this is not the case on your machine.
@@ -239,11 +239,11 @@ You need a running *ElasticSearch* in docker. To achieve this run:
 
     $ docker run -d --name=elasticsearch --env 'discovery.type=single-node' docker.elastic.co/elasticsearch/elasticsearch:6.3.2
 
-If you want to use all the JMAP search capabilities, you may also need to start Tika:
+If you want to handle attachment text extraction before indexing in ElasticSearch (this makes attachments searchable)
+and if you want to use all the JMAP search capabilities, you also need to start Tika.
+See [Tika configuration documentation](http://james.apache.org/server/config-elasticsearch.html#Tika_Configuration) for more info.
 
     $ docker run -d --name=tika apache/tika:1.24
-
-You can find more explanation on the need of Tika in this page http://james.apache.org/server/config-elasticsearch.html
 
 We need to provide the key we will use for TLS. For obvious reasons, this is not provided in this git.
 
@@ -262,23 +262,12 @@ To run this container :
 Where :
 
 - HOSTNAME: is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
+- link to tika is only needed if you started tika earlier.
 
 Webadmin port binding is restricted to loopback as users are not authenticated by default on webadmin server. Thus you should avoid exposing it in production.
 Note that the above example assumes `127.0.0.1` is your loopback interface for convenience but you should change it if this is not the case on your machine.
 
 To have log file accessible on a volume, add *-v  $PWD/logs:/logs* option to the above command line, where *$PWD/logs* is your local directory to put files in.
-
-==== Handling attachment indexing
-
-You can handle attachment text extraction before indexing in ElasticSearch. This makes attachments searchable. To enable this:
-
-Run tika:
-
-    $ docker run --name tika apache/tika:1.24
-
-Add a link for the tika container in the above command line:
-
-    $ docker run --hostname HOSTNAME -p "25:25" -p 80:80 -p "110:110" -p "143:143" -p "465:465" -p "587:587" -p "993:993" --link cassandra:cassandra --link elasticsearch:elasticsearch --link tika:tika --name james_run -t james_run
 
 === Run James with Guice + JPA + Lucene
 
