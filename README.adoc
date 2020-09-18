@@ -190,7 +190,7 @@ To run this container :
 
 Where :
 
-- HOSTNAME: is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
+- HOSTNAME is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
 - link to tika is only needed if you started tika earlier.
 
 Webadmin port binding is restricted to loopback as users are not authenticated by default on webadmin server. Thus you should avoid exposing it in production.
@@ -261,7 +261,7 @@ To run this container :
 
 Where :
 
-- HOSTNAME: is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
+- HOSTNAME is the hostname you want to give to your James container. This DNS entry will be used to send mail to your James server.
 - link to tika is only needed if you started tika earlier.
 
 Webadmin port binding is restricted to loopback as users are not authenticated by default on webadmin server. Thus you should avoid exposing it in production.
