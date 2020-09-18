@@ -65,8 +65,7 @@ which will be automatically published via gitpubsub to http://james.apache.org[A
 
 == How to contribute some code?
 
-* Clone the source code of the project from its link:git://git.apache.org/james-project.git[apache git repository] or its
-https://github.com/apache/james-project[Github]
+* Clone the source code of the project from https://github.com/apache/james-project[Github]
 * Create your branch and name it with the JIRA ticket number.
 * Create a Pull Request with your branch name and prefix its different commits with the same name.
 
