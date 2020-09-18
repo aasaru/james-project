@@ -226,10 +226,23 @@ More details about the property is at [java mail doc](https://javaee.github.io/j
 
 ## [3.0.1] - 2017-10-20
 ### Changed
-- Fix CVE-2017-12628: java deserialization issue exposed by JMX
+- Fix CVE-2017-12628: fixes vulnerability described in CVE-2017-12628.
+The JMX server, also used by the command line client is exposed to a java de-serialization
+issue, and thus can be used to execute arbitrary commands. As James
+exposes JMX socket by default only on local-host, this vulnerability can
+only be used for privilege escalation.
+
 
 ## [3.0.0] - 2017-07-20
-Too many untracked changes, sorry. But you can have a look at our latest news: [James posts](http://james.apache.org/posts.html)
+After a long work, the team is really proud to announce the new release, James 3.0 of its modular mail server.
+This new version of the Apache James Server introduces many new features, like the IMAP protocol, experimental Sieve support, 
+experimental JMAP support, and new email storage back-ends.
 
-## Before
-Refer too [Old changelog](http://james.apache.org/server/2.3.0/changelog.html)
+For the James 3.0 release, the team have been specifically committed to testing. 
+We care about unit testing in a Test Driven Development way. 
+We added many integration tests, using the Mail Protocol Tester suite, but also using various IMAP, SMTP and HTTP clients. 
+We conducted load testing campaigns, and developed tools based on Gatling, a load testing framework, for the JMAP, IMAP and SMTP protocols. 
+We introduced live metric collection and display in Grafana, as well as log collection in Kibana.
+
+## Earlier releases
+Refer too [Old release notes](https://james.apache.org/server/release-notes.html) and [James posts](http://james.apache.org/posts.html).

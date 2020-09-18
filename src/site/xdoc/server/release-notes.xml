@@ -20,63 +20,19 @@
 <document>
 
     <properties>
-        <title>Apache James Server 3 - Release Notes</title>
+        <title>Apache James Server - Release Notes History</title>
         <author email="site-dev@james.apache.org">James Project Web Team</author>
     </properties>
 
     <body>
 
-        <div class="ui-widget">
-            <div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
-                <p><span class="ui-icon ui-icon-circle-plus" style="float: left; margin-right: .3em;"></span>
-                    This document records what was done between releases.
-                    As always, thank you to everyone who contributed code,
-                    documentation, bug reports, and feedback!</p>
-            </div>
-        </div>
+        <section name="Release notes page has moved to Github">
+            <p>Release notes starting version 3.0.0 can be now found
+                <a href="https://github.com/apache/james-project/blob/master/CHANGELOG.md">in the Github Changelog page</a>.</p>
 
-        <section name="Version 3.0.1">
-
-            <p>Released October 2017</p>
-
-            <p>The Apache James PMCs are glad to announce you the release
-                version 3.0.1 of Apache James server.</p>
-
-            <p>It fixes vulnerability described in CVE-2017-12628. The JMX server, also
-                used by the command line client is exposed to a java de-serialization
-                issue, and thus can be used to execute arbitrary commands. As James
-                exposes JMX socket by default only on local-host, this vulnerability can
-                only be used for privilege escalation.</p>
-
-            <p>If you're interested in contributing to the James project, please subscribe to the James
-                <a href="http://james.apache.org/mail.html">mailing lists</a>.</p>
-
+            <p>This page is kept for historic reasons.</p>
         </section>
 
-        <section name="Version 3.0.0">
-
-            <p>Released July 2017</p>
-
-            <p>The Apache James project is happy to announce the release
-                of version 3.0.0 of its modular mail server.</p>
-
-            <p>After a long work, the team is really proud to announce the new release, James 3.0.
-                This new version of the Apache James Server introduces many new features, 
-                like the IMAP protocol, 
-                experimental Sieve support, 
-                experimental JMAP support, 
-                and new email storage back-ends.</p>
-
-            <p>For the James 3.0 release, the team have been specifically committed to testing. 
-                We care about unit testing in a Test Driven Development way. 
-                We added many integration tests, using the Mail Protocol Tester suite, but also using various IMAP, SMTP and HTTP clients. 
-                We conducted load testing campaigns, and developed tools based on Gatling, a load testing framework, for the JMAP, IMAP and SMTP protocols. 
-                We introduced live metric collection and display in Grafana, as well as log collection in Kibana.</p>
-
-            <p>If you're interested in contributing to the James project, please subscribe to the James
-                <a href="http://james.apache.org/mail.html">mailing lists</a>.</p>
-
-        </section>
 
         <section name="Version 3.0-RC1">
 
