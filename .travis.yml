@@ -39,4 +39,4 @@ cache:
 
 script:
   - date
-  - ./mvnw clean install
+  - ./mvnw --no-transfer-progress clean install
