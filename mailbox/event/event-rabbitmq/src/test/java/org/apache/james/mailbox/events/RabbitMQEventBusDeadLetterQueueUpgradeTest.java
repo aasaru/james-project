@@ -37,6 +37,7 @@ import org.apache.james.metrics.tests.RecordingMetricFactory;
 import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -69,7 +70,7 @@ class RabbitMQEventBusDeadLetterQueueUpgradeTest {
         eventBus.stop();
     }
 
-    @Ignore
+    @Disabled
     @Test
     void eventBusShouldStartWhenDeadLetterUpgradeWasNotPerformed() {
         GroupA registeredGroup = new GroupA();
