@@ -46,4 +46,4 @@ cache:
 
 script:
   - date
-  - mvn clean install
+  - ./mvnw clean install
