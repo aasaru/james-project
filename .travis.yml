@@ -20,9 +20,6 @@ dist: bionic
 
 language: generic
 
-services:
-  - docker
-
 before_install:
   - echo $JAVA_HOME
   - which java
