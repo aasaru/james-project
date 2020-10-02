@@ -34,6 +34,10 @@ cache:
   directories:
     - $HOME/.m2
 
-script:
-  - date
-  - ./mvnw --no-transfer-progress -DskipTests=true clean package
+
+jobs:
+  include:
+    - stage: test modules in parallel
+      script: cd core && ../mvnw test
+    - script: cd event-sourcing && ../mvnw test
+    - script: cd javax-mail-extension && ../mvnw test
