@@ -36,4 +36,4 @@ cache:
 
 script:
   - date
-  - ./mvnw --no-transfer-progress clean install
+  - ./mvnw --no-transfer-progress -DskipTests=true clean package
