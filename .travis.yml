@@ -37,6 +37,8 @@ cache:
 
 jobs:
   include:
+    - stage: compile everything
+      script: ./mvnw -q -DskipTests=true package
     - stage: test modules in parallel
       script: cd backends-common && ../mvnw --no-transfer-progress test
     - script: cd mailbox/cassandra &&../../mvnw --no-transfer-progress test
