@@ -37,9 +37,9 @@ cache:
 
 jobs:
   include:
-    - stage: compile everything
-      script: ./mvnw -q -DskipTests=true package
-    - stage: test modules in parallel
+    - stage: compile
+      script: ./mvnw -q -Dmaven.test.skip=true package
+    - stage: run test in parallel
       script: cd backends-common && ../mvnw --no-transfer-progress test
     - script: cd mailbox/cassandra &&../../mvnw --no-transfer-progress test
     - script: ./test_batch1.sh
@@ -59,7 +59,6 @@ jobs:
     - script: cd mailbox/lucene &&../../mvnw --no-transfer-progress test
     - script: cd mailbox/maildir &&../../mvnw --no-transfer-progress test
     - script: cd mailbox/memory &&../../mvnw --no-transfer-progress test
-
     - script: cd mailbox/plugin/quota-mailing && ../../../mvnw --no-transfer-progress test
     - script: cd mailbox/plugin/quota-search && ../../../mvnw --no-transfer-progress test
     - script: cd mailbox/scanning-search &&../../mvnw --no-transfer-progress test
@@ -69,12 +68,9 @@ jobs:
     - script: cd mailbox/tools/indexer && ../../../mvnw --no-transfer-progress test
     - script: cd mailbox/tools/jpa-migrator && ../../../mvnw --no-transfer-progress test
     - script: cd mailbox/tools/quota-recompute && ../../../mvnw --no-transfer-progress test
-        
-    - stage: test dependent packages
-      script: cd server && ../mvnw --no-transfer-progress test
+    - script: cd server && ../mvnw --no-transfer-progress test
     - script: cd mpt && ../mvnw --no-transfer-progress test
     - script: cd third-party && ../mvnw --no-transfer-progress test
-
     - script: cd mailbox/jpa &&../../mvnw --no-transfer-progress test
     - script: cd mailbox/plugin/deleted-messages-vault && ../../../mvnw --no-transfer-progress test
     - script: cd mailbox/plugin/deleted-messages-vault-cassandra && ../../../mvnw --no-transfer-progress test
