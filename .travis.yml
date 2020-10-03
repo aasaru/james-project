@@ -38,6 +38,19 @@ cache:
 jobs:
   include:
     - stage: test modules in parallel
-      script: cd core && ../mvnw test
-    - script: cd event-sourcing && ../mvnw test
-    - script: cd javax-mail-extension && ../mvnw test
+      script: cd backends-common && ../mvnw --no-transfer-progress test
+    - script: cd core && ../mvnw --no-transfer-progress test
+    - script: cd event-sourcing && ../mvnw --no-transfer-progress test
+    - script: cd examples && ../mvnw --no-transfer-progress test
+    - script: cd javax-mail-extension && ../mvnw --no-transfer-progress test
+    - script: cd json && ../mvnw --no-transfer-progress test
+    - script: cd mailbox && ../mvnw --no-transfer-progress test
+    - script: cd mailet && ../mvnw --no-transfer-progress test
+    - script: cd mdn && ../mvnw --no-transfer-progress test
+    - script: cd metrics && ../mvnw --no-transfer-progress test
+    - script: cd mpt && ../mvnw --no-transfer-progress test
+    - script: cd protocols && ../mvnw --no-transfer-progress test
+    - script: cd server && ../mvnw --no-transfer-progress test
+    - script: cd testing/base && ../mvnw --no-transfer-progress test
+    - script: cd third-party && ../mvnw --no-transfer-progress test
+
