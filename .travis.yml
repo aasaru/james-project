@@ -39,18 +39,50 @@ jobs:
   include:
     - stage: test modules in parallel
       script: cd backends-common && ../mvnw --no-transfer-progress test
-    - script: cd core && ../mvnw --no-transfer-progress test
-    - script: cd event-sourcing && ../mvnw --no-transfer-progress test
-    - script: cd examples && ../mvnw --no-transfer-progress test
-    - script: cd javax-mail-extension && ../mvnw --no-transfer-progress test
-    - script: cd json && ../mvnw --no-transfer-progress test
+    - script: ./test_batch1.sh
     - script: cd mailbox && ../mvnw --no-transfer-progress test
     - script: cd mailet && ../mvnw --no-transfer-progress test
     - script: cd mdn && ../mvnw --no-transfer-progress test
     - script: cd metrics && ../mvnw --no-transfer-progress test
-    - script: cd mpt && ../mvnw --no-transfer-progress test
     - script: cd protocols && ../mvnw --no-transfer-progress test
     - script: cd server && ../mvnw --no-transfer-progress test
-    - script: cd testing/base && ../mvnw --no-transfer-progress test
+    - script: cd testing/base && ../../mvnw --no-transfer-progress test
+
+    - script: cd api && ../mvnw --no-transfer-progress test
+    - script: cd backup && ../mvnw --no-transfer-progress test
+    - script: cd cassandra && ../mvnw --no-transfer-progress test
+    - script: cd elasticsearch && ../mvnw --no-transfer-progress test
+    - script: cd event/event-cassandra && ../../mvnw --no-transfer-progress test
+    - script: cd event/event-memory && ../../mvnw --no-transfer-progress test
+    - script: cd event/event-rabbitmq && ../../mvnw --no-transfer-progress test
+    - script: cd event/json && ../../mvnw --no-transfer-progress test
+    - script: cd jpa && ../mvnw --no-transfer-progress test
+    - script: cd lucene && ../mvnw --no-transfer-progress test
+    - script: cd maildir && ../mvnw --no-transfer-progress test
+    - script: cd memory && ../mvnw --no-transfer-progress test
+    - script: cd plugin/deleted-messages-vault && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/deleted-messages-vault-cassandra && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-mailing && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-mailing-cassandra && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-mailing-memory && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-search && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-search-elasticsearch && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/quota-search-scanning && ../../mvnw --no-transfer-progress test
+    - script: cd plugin/spamassassin && ../../mvnw --no-transfer-progress test
+    - script: cd scanning-search && ../mvnw --no-transfer-progress test
+    - script: cd spring && ../mvnw --no-transfer-progress test
+    - script: cd store && ../mvnw --no-transfer-progress test
+    - script: cd tika && ../mvnw --no-transfer-progress test
+    - script: cd tools/copier && ../../mvnw --no-transfer-progress test
+    - script: cd tools/indexer && ../../mvnw --no-transfer-progress test
+    - script: cd tools/jpa-migrator && ../../mvnw --no-transfer-progress test
+    - script: cd tools/quota-recompute && ../../mvnw --no-transfer-progress test
+
+    - stage: test dependent packages
+      script: cd mpt && ../mvnw --no-transfer-progress test
     - script: cd third-party && ../mvnw --no-transfer-progress test
+
+
+
+
 
