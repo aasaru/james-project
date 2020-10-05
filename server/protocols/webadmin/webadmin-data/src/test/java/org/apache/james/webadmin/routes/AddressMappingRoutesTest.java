@@ -65,7 +65,7 @@ class AddressMappingRoutesTest {
 
         RestAssured.requestSpecification = WebAdminUtils.buildRequestSpecification(webAdminServer)
             .setBasePath(AddressMappingRoutes.BASE_PATH)
-            .log(LogDetail.METHOD)
+             .log(LogDetail.METHOD)
             .build();
     }
 

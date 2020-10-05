@@ -61,7 +61,7 @@ class RegexMappingRoutesTest {
 
         RestAssured.requestSpecification = WebAdminUtils.buildRequestSpecification(webAdminServer)
             .setBasePath(RegexMappingRoutes.BASE_PATH)
-         //   .log(LogDetail.METHOD)
+            .log(LogDetail.METHOD)
             .build();
     }
 
