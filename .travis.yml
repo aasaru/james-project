@@ -40,7 +40,14 @@ jobs:
     - stage: compile and install dependencies into $HOME/.m2 folder
       script: ./travis_phase1.sh
     - stage: run test in parallel (starting with ones that run the longest)
-      script: cd server && ../mvnw -q test
+      script: cd server && ../mvnw -q test -DskipServerAppTests=true -DskipServerContainerCoreTests=true -DskipMailRepositoryCassandraTests=true
+
+
+    - script: cd server/app && ../../mvnw -q test
+    - script: cd server/container/core && ../../../mvnw -q test
+    - script: cd server/mailrepository/mailrepository-cassandra && ../../../mvnw -q test
+
+
     - script: cd mpt && ../mvnw --no-transfer-progress test
     - script: cd backends-common && ../mvnw --no-transfer-progress test
     - script: cd mailbox/cassandra &&../../mvnw --no-transfer-progress test

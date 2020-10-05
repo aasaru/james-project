@@ -32,6 +32,10 @@
 
     <name>Apache James :: Server :: MailRepository :: Cassandra</name>
 
+    <properties>
+        <skipMailRepositoryCassandraTests>false</skipMailRepositoryCassandraTests>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${james.groupId}</groupId>
@@ -92,6 +96,7 @@
                 <configuration>
                     <reuseForks>true</reuseForks>
                     <forkCount>2</forkCount>
+                    <skipTests>${skipMailRepositoryCassandraTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

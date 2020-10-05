@@ -32,6 +32,10 @@
 
     <name>Apache James :: Server :: Core</name>
 
+    <properties>
+        <skipServerContainerCoreTests>false</skipServerContainerCoreTests>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${javax.activation.groupId}</groupId>
@@ -117,6 +121,7 @@
                 <configuration>
                     <reuseForks>false</reuseForks>
                     <forkCount>1C</forkCount>
+                    <skipTests>${skipServerContainerCoreTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
