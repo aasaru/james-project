@@ -40,7 +40,7 @@ jobs:
     - stage: compile and install dependencies into $HOME/.m2 folder
       script: ./travis_phase1.sh
     - stage: run test in parallel (starting with ones that run the longest)
-      script: cd server && ../mvnw -q test -DskipServerAppTests=true -DskipServerContainerCoreTests=true -DskipMailRepositoryCassandraTests=true
+      script: cd server && ../mvnw -q test -DskipServerAppTests=true -DskipServerContainerCoreTests=true -DskipMailRepositoryCassandraTests=true -DskipSomeTests=true
 
 
     - script: cd server/app && ../../mvnw -q test

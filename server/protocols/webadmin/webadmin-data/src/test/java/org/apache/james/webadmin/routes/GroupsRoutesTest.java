@@ -84,7 +84,7 @@ class GroupsRoutesTest {
 
         RestAssured.requestSpecification = WebAdminUtils.buildRequestSpecification(webAdminServer)
             .setBasePath("address/groups")
-            .log(LogDetail.METHOD)
+         // TOO MUCH OUTPUT   .log(LogDetail.METHOD)
             .build();
     }
 

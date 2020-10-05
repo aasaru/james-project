@@ -32,6 +32,10 @@
 
     <name>Apache James :: Server :: Mailets Integration Testing</name>
 
+    <properties>
+        <skipSomeTests>false</skipSomeTests>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${james.groupId}</groupId>
@@ -164,6 +168,7 @@
                 <configuration>
                     <reuseForks>true</reuseForks>
                     <forkCount>1C</forkCount>
+                    <skipTests>${skipSomeTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

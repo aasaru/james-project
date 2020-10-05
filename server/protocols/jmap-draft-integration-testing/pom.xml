@@ -32,6 +32,10 @@
     <packaging>pom</packaging>
     <name>Apache James :: Server :: JMAP (draft) :: Integration testing</name>
 
+    <properties>
+        <skipSomeTests>false</skipSomeTests>
+    </properties>
+
     <modules>
         <module>cassandra-jmap-draft-integration-testing</module>
         <module>jmap-draft-integration-testing-common</module>
@@ -45,6 +49,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>${skipSomeTests}</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
