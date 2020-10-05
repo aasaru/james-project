@@ -40,57 +40,57 @@ jobs:
     - stage: compile and install dependencies into $HOME/.m2 folder
       script: ./travis_phase1.sh
     - stage: run test in parallel (starting with ones that run the longest)
-      script: cd server && ../mvnw -q test -DskipServerAppTests=true -DskipServerContainerCoreTests=true -DskipMailRepositoryCassandraTests=true -DskipSomeTests=true
-
-
-    - script: cd server/app && ../../mvnw -q test
-    - script: cd server/container/core && ../../../mvnw -q test
-    - script: cd server/mailrepository/mailrepository-cassandra && ../../../mvnw -q test
-
-
-    - script: cd mpt && ../mvnw --no-transfer-progress test
-    - script: cd backends-common && ../mvnw --no-transfer-progress test
-    - script: cd mailbox/cassandra &&../../mvnw --no-transfer-progress test
-    - script: cd core && ../mvnw --no-transfer-progress test
-    - script: cd event-sourcing && ../mvnw --no-transfer-progress test
-    - script: cd examples && ../mvnw --no-transfer-progress test
-    - script: cd javax-mail-extension && ../mvnw --no-transfer-progress test
-    - script: cd json && ../mvnw --no-transfer-progress test
-    - script: cd mailet && ../mvnw --no-transfer-progress test
-    - script: cd mdn && ../mvnw --no-transfer-progress test
-    - script: cd metrics && ../mvnw --no-transfer-progress test
-    - script: cd protocols && ../mvnw --no-transfer-progress test
-    - script: cd testing/base && ../../mvnw --no-transfer-progress test
-    # already done during phase#1: - script: cd mailbox/api &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/backup &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/elasticsearch &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/event/event-cassandra && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/event/event-memory && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/event/event-rabbitmq && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/event/json && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/lucene &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/maildir &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/memory &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-mailing && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-search && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/scanning-search &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/store &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/tika &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/tools/copier && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/tools/indexer && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/tools/jpa-migrator && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/tools/quota-recompute && ../../../mvnw --no-transfer-progress test
-    - script: cd third-party && ../mvnw --no-transfer-progress test
-    - script: cd mailbox/jpa &&../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/deleted-messages-vault && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/deleted-messages-vault-cassandra && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-mailing-cassandra && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-mailing-memory && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-search-elasticsearch && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/quota-search-scanning && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/plugin/spamassassin && ../../../mvnw --no-transfer-progress test
-    - script: cd mailbox/spring &&../../mvnw --no-transfer-progress test
-
+      script: cd server && ../mvnw -q test -DskipServerAppTests=true -DskipServerContainerCoreTests=true -DskipMailRepositoryCassandraTests=true -DskipSomeTests=true | egrep -v "\tat"
+#
+#
+#    - script: cd server/app && ../../mvnw -q test
+#    - script: cd server/container/core && ../../../mvnw -q test
+#    - script: cd server/mailrepository/mailrepository-cassandra && ../../../mvnw -q test
+#
+#
+#    - script: cd mpt && ../mvnw --no-transfer-progress test
+#    - script: cd backends-common && ../mvnw --no-transfer-progress test
+#    - script: cd mailbox/cassandra &&../../mvnw --no-transfer-progress test
+#    - script: cd core && ../mvnw --no-transfer-progress test
+#    - script: cd event-sourcing && ../mvnw --no-transfer-progress test
+#    - script: cd examples && ../mvnw --no-transfer-progress test
+#    - script: cd javax-mail-extension && ../mvnw --no-transfer-progress test
+#    - script: cd json && ../mvnw --no-transfer-progress test
+#    - script: cd mailet && ../mvnw --no-transfer-progress test
+#    - script: cd mdn && ../mvnw --no-transfer-progress test
+#    - script: cd metrics && ../mvnw --no-transfer-progress test
+#    - script: cd protocols && ../mvnw --no-transfer-progress test
+#    - script: cd testing/base && ../../mvnw --no-transfer-progress test
+#    # already done during phase#1: - script: cd mailbox/api &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/backup &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/elasticsearch &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/event/event-cassandra && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/event/event-memory && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/event/event-rabbitmq && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/event/json && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/lucene &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/maildir &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/memory &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-mailing && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-search && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/scanning-search &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/store &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/tika &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/tools/copier && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/tools/indexer && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/tools/jpa-migrator && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/tools/quota-recompute && ../../../mvnw --no-transfer-progress test
+#    - script: cd third-party && ../mvnw --no-transfer-progress test
+#    - script: cd mailbox/jpa &&../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/deleted-messages-vault && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/deleted-messages-vault-cassandra && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-mailing-cassandra && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-mailing-memory && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-search-elasticsearch && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/quota-search-scanning && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/plugin/spamassassin && ../../../mvnw --no-transfer-progress test
+#    - script: cd mailbox/spring &&../../mvnw --no-transfer-progress test
+#
 
 
 
