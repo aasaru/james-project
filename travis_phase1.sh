@@ -2,15 +2,15 @@
 #Exit immediately if a command exits with a non-zero status.
 set -e
 
-export PING_SLEEP=30s
+export PING_SLEEP=120s
 export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export BUILD_OUTPUT=$WORKDIR/travis_phase1.out
 
 touch $BUILD_OUTPUT
 
 dump_output() {
-   echo Tailing the last 500 lines of output:
-   tail -500 $BUILD_OUTPUT
+   echo Tailing the last 1000 lines of output:
+   tail -1000 $BUILD_OUTPUT
 }
 error_handler() {
   echo ERROR: An error was encountered with the build.
@@ -30,6 +30,7 @@ PING_LOOP_PID=$!
 # your_build_command_2 >> $BUILD_OUTPUT 2>&1
 ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1
 cd mailbox/api >> $BUILD_OUTPUT 2>&1
+echo "starting to build mailbox/api" >> $BUILD_OUTPUT 2>&1
 ../../mvnw install >> $BUILD_OUTPUT 2>&1
 
 # The build finished without returning an error so dump a tail of the output

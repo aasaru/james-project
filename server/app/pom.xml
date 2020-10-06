@@ -67,8 +67,6 @@
         <james.system-properties>${james.system-property1}</james.system-properties>
         <!-- this name is used for James's folders on Debian systems and james user -->
         <james.debian.user>apache-james</james.debian.user>
-
-        <skipServerAppTests>false</skipServerAppTests>
     </properties>
 
     <dependencies>
@@ -954,7 +952,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <reuseForks>false</reuseForks>
-                    <skipTests>${skipServerAppTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

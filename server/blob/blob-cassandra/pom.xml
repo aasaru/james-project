@@ -32,10 +32,6 @@
 
     <name>Apache James :: Server :: Blob :: Cassandra</name>
 
-    <properties>
-        <skipSomeTests>false</skipSomeTests>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>${james.groupId}</groupId>
@@ -104,7 +100,6 @@
                 <configuration>
                     <reuseForks>true</reuseForks>
                     <forkCount>2</forkCount>
-                    <skipTests>${skipSomeTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

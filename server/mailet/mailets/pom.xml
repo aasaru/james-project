@@ -34,7 +34,6 @@
 
     <properties>
         <spec2.version>4.9.4</spec2.version>
-        <skipSomeTests>false</skipSomeTests>
     </properties>
 
 
@@ -278,7 +277,6 @@
                 <configuration>
                     <reuseForks>true</reuseForks>
                     <forkCount>1C</forkCount>
-                    <skipTests>${skipSomeTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
