@@ -11,7 +11,7 @@ EXIT_STATUS=0
 docker pull linagora/mock-smtp-server:latest
 
 # do the main work
-./mvnw -q -DskipTests=true install || EXIT_STATUS=$?
+./mvnw -q -T 8 -DskipTests=true install || EXIT_STATUS=$?
 
 # besides above we also need following artifacts:
 # org.apache.james:apache-james-mailbox-api:jar:3.6.0-SNAPSHOT
