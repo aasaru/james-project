@@ -52,7 +52,7 @@ cd server/container/mailbox-adapter && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 cd server/container/mailbox-jmx && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/metrics/metrics-es-reporter && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd server/container/metrics/metrics-es-reporter && ../../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
 cd server/container/spring && ../../../mvnw test >> $BUILD_OUTPUT 2>&1

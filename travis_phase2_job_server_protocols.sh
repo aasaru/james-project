@@ -45,33 +45,33 @@ cd server/protocols/jmap-rfc-8621 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 (
 cd server/protocols/jmap-rfc-8621-integration-tests && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
-(
-cd server/protocols/jwt && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-imap4 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-lmtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-managesieve && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-pop3 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/protocols-smtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/webadmin && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/webadmin-integration-test && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+#(
+#cd server/protocols/jwt && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-imap4 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-lmtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-managesieve && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-pop3 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/protocols-smtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/webadmin && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd server/protocols/webadmin-integration-test && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
 
 
 
