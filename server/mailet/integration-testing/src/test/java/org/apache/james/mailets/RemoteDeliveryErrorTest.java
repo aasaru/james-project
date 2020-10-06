@@ -60,6 +60,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -68,6 +69,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 
+@Ignore
 public class RemoteDeliveryErrorTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RemoteDeliveryErrorTest.class);

@@ -58,6 +58,7 @@ import org.apache.james.utils.WebAdminGuiceProbe;
 import org.apache.james.webadmin.WebAdminUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
@@ -66,6 +67,7 @@ import com.google.inject.util.Modules;
 
 import io.restassured.specification.RequestSpecification;
 
+@Disabled
 public class RemoteDeliveryErrorHandlingTest {
     private static final String FROM = "from@" + DEFAULT_DOMAIN;
     private static final String RECIPIENT_DOMAIN = "test.com";
