@@ -7,6 +7,10 @@ EXIT_STATUS=0
 # This is phase #1 where we compile code and build all snapshot.jar files
 # and install them into $HOME/.m2 directory
 
+# prepare
+docker pull linagora/mock-smtp-server:latest
+
+# do the main work
 ./mvnw -q -DskipTests=true install || EXIT_STATUS=$?
 
 # besides above we also need following artifacts:
