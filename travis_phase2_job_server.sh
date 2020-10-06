@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://stackoverflow.com/a/26082445/158257
 # Abort on Error
 set -e
 
