@@ -36,14 +36,6 @@ cd mailbox/api >> $BUILD_OUTPUT 2>&1
 )
 
 
-
-# TODO move this away from here...
-(
-echo "starting to build backends-common/cassandra" >> $BUILD_OUTPUT 2>&1
-cd backends-common/cassandra >> $BUILD_OUTPUT 2>&1
-../../mvnw install >> $BUILD_OUTPUT 2>&1
-)
-
 # The build finished without returning an error so dump a tail of the output
 dump_output
 

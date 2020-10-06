@@ -55,6 +55,7 @@ jobs:
     - script: ./travis_phase2_job_server_mailrepository.sh
     - script: ./travis_phase2_job_server_protocols.sh
     - script: ./travis_phase2_job_server_protocols2.sh
+    - script: ./travis_phase2_job_server_protocols3.sh
     - script: ./travis_phase2_job_server_queue.sh
     - script: ./travis_phase2_job_server_task.sh
     - script: ./travis_phase2_job_server_testing.sh
