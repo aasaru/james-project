@@ -23,28 +23,24 @@ trap 'error_handler' ERR
 
 # Set up a repeating loop to send some output to Travis.
 
-bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep $PING_SLEEP; done" &
+bash -c "while true; do echo \$(date) - running mail tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# ADD COMMANDS HERE
+# Add actual commands here
 (
-cd server/protocols/fetchmail && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+echo "starting to build json" >> $BUILD_OUTPUT 2>&1
+cd json >> $BUILD_OUTPUT 2>&1
+../mvnw install >> $BUILD_OUTPUT 2>&1
 )
+
 (
-cd server/protocols/jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+echo "starting to build backends-common" >> $BUILD_OUTPUT 2>&1
+cd backends-common >> $BUILD_OUTPUT 2>&1
+../mvnw install >> $BUILD_OUTPUT 2>&1
 )
-(
-cd server/protocols/jmap-draft && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-draft-integration-testing && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-rfc-8621 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-rfc-8621-integration-tests && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+
+
+
 
 # The build finished without returning an error so dump a tail of the output
 dump_output

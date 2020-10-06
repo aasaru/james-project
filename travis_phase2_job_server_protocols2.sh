@@ -27,24 +27,10 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
-#(
-#cd server/protocols/fetchmail && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
-#(
-#cd server/protocols/jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
-#(
-#cd server/protocols/jmap-draft && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
-#(
-#cd server/protocols/jmap-draft-integration-testing && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
-#(
-#cd server/protocols/jmap-rfc-8621 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
-#(
-#cd server/protocols/jmap-rfc-8621-integration-tests && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-#)
+
+echo "install mailbox as it is needed by imap4" >> $BUILD_OUTPUT 2>&1
+( cd mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
+
 (
 cd server/protocols/jwt && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )

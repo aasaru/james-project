@@ -44,7 +44,8 @@ jobs:
       script: ./travis_phase1.sh
 
     - stage: run test in parallel (starting with ones that run the longest)
-      script: ./travis_phase2_job_mailbox_mailet.sh
+      script: ./travis_phase2_job_json_backends-common.sh
+    - script: ./travis_phase2_job_mailbox_mailet_examples.sh
     - script: ./travis_phase2_job_server_app.sh
     - script: ./travis_phase2_job_server_blob.sh
     - script: ./travis_phase2_job_server_container.sh
@@ -59,16 +60,11 @@ jobs:
     - script: ./travis_phase2_job_server_testing.sh
 
     - script: cd mpt && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd backends-common && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd core && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd event-sourcing && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd examples && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd javax-mail-extension && ../mvnw -T 1C  --no-transfer-progress test
-
     - script: cd mdn && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd metrics && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd protocols && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd testing/base && ../../mvnw -T 1C  --no-transfer-progress test
     - script: cd third-party && ../mvnw -T 1C  --no-transfer-progress test
 
 

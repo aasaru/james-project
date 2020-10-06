@@ -31,6 +31,9 @@ echo "starting to install mailbox" >> $BUILD_OUTPUT 2>&1
 ( cd mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
 echo "starting to test mailet" >> $BUILD_OUTPUT 2>&1
 ( cd mailet && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
+echo "starting to test examples" >> $BUILD_OUTPUT 2>&1
+( cd examples && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
 
 
 

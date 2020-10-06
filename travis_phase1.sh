@@ -27,19 +27,22 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# My build is using maven, but you could build anything with this, E.g.
-# your_build_command_1 >> $BUILD_OUTPUT 2>&1
-# your_build_command_2 >> $BUILD_OUTPUT 2>&1
 ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1
+
+(
 echo "starting to build mailbox/api" >> $BUILD_OUTPUT 2>&1
 cd mailbox/api >> $BUILD_OUTPUT 2>&1
 ../../mvnw install >> $BUILD_OUTPUT 2>&1
-echo "starting to build json" >> $BUILD_OUTPUT 2>&1
-cd json >> $BUILD_OUTPUT 2>&1
-../mvnw install >> $BUILD_OUTPUT 2>&1
+)
+
+
+
+# TODO move this away from here...
+(
 echo "starting to build backends-common/cassandra" >> $BUILD_OUTPUT 2>&1
 cd backends-common/cassandra >> $BUILD_OUTPUT 2>&1
 ../../mvnw install >> $BUILD_OUTPUT 2>&1
+)
 
 # The build finished without returning an error so dump a tail of the output
 dump_output
