@@ -1,28 +1,39 @@
 #!/usr/bin/env bash
 #Exit immediately if a command exits with a non-zero status.
 set -e
-#Propagate script exit code to the output of this program
-EXIT_STATUS=0
 
-# This is phase #1 where we compile code and build all snapshot.jar files
-# and install them into $HOME/.m2 directory
+export PING_SLEEP=30s
+export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export BUILD_OUTPUT=$WORKDIR/travis_phase1.out
 
-# prepare
-docker pull linagora/mock-smtp-server:latest
+touch $BUILD_OUTPUT
 
-# do the main work
-./mvnw -q -T 8 -DskipTests=true install || EXIT_STATUS=$?
+dump_output() {
+   echo Tailing the last 500 lines of output:
+   tail -500 $BUILD_OUTPUT
+}
+error_handler() {
+  echo ERROR: An error was encountered with the build.
+  dump_output
+  exit 1
+}
+# If an error occurs, run our error handler to output a tail of the build
+trap 'error_handler' ERR
 
-# besides above we also need following artifacts:
-# org.apache.james:apache-james-mailbox-api:jar:3.6.0-SNAPSHOT
-# and
-# org.apache.james:apache-james-mailbox-api:jar:tests:3.6.0-SNAPSHOT
-(
-cd mailbox/api
-../../mvnw -q install || EXIT_STATUS=$?
-)
+# Set up a repeating loop to send some output to Travis.
 
-# Now we should have all dependencies populated and we can start running test sin parallel
-# All processes in phase #2 get the same $HOME/.m2 directory contents we built in this step
+bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
+PING_LOOP_PID=$!
 
-exit ${EXIT_STATUS}
+# My build is using maven, but you could build anything with this, E.g.
+# your_build_command_1 >> $BUILD_OUTPUT 2>&1
+# your_build_command_2 >> $BUILD_OUTPUT 2>&1
+./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1
+cd mailbox/api >> $BUILD_OUTPUT 2>&1
+../../mvnw install >> $BUILD_OUTPUT 2>&1
+
+# The build finished without returning an error so dump a tail of the output
+dump_output
+
+# nicely terminate the ping output loop
+kill $PING_LOOP_PID
