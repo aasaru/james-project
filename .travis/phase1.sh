@@ -5,11 +5,12 @@
 #Exit immediately if a command exits with a non-zero status.
 set -e
 
-cd ..
-
 export PING_SLEEP=120s
 export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export BUILD_OUTPUT=$WORKDIR/travis_phase1.out
+
+echo 'WORKDIR:'
+echo $WORKDIR
 
 touch $BUILD_OUTPUT
 
@@ -29,6 +30,7 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
+cd..
 ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1
 
 # The build finished without returning an error so dump a tail of the output
