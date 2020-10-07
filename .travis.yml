@@ -40,8 +40,8 @@ cache:
 
 jobs:
   include:
-    - stage: compile and install dependencies into $HOME/.m2 folder
-      script: ./travis_phase1.sh
+    - stage: compile and install dependencies into $HOME/.m2
+      script: .travis/phase1.sh
 
     - stage: run test in parallel (starting with ones that run the longest)
       script: ./travis_phase2_job_server_protocols.sh
@@ -57,16 +57,16 @@ jobs:
     - script: ./travis_phase2_job_server_data.sh
     - script: ./travis_phase2_job_server_dns-service.sh
     - script: ./travis_phase2_job_server_mailet.sh
-    - script: ./travis_phase2_job_server_mailrepository.sh
     - script: ./travis_phase2_job_server_queue.sh
     - script: ./travis_phase2_job_server_task.sh
+    - script: cd third-party && ../mvnw -T 1C  --no-transfer-progress test
+    - script: ./travis_phase2_job_server_mailrepository.sh
+    - script: cd event-sourcing && ../mvnw -T 1C  --no-transfer-progress test
     - script: ./travis_phase2_job_server_testing.sh
     - script: cd core && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd event-sourcing && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd javax-mail-extension && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd mdn && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd metrics && ../mvnw -T 1C  --no-transfer-progress test
-    - script: cd third-party && ../mvnw -T 1C  --no-transfer-progress test
 
 
 
