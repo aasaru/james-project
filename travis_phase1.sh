@@ -29,11 +29,11 @@ PING_LOOP_PID=$!
 
 ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1
 
-(
-echo "starting to build mailbox/api" >> $BUILD_OUTPUT 2>&1
-cd mailbox/api >> $BUILD_OUTPUT 2>&1
-../../mvnw install >> $BUILD_OUTPUT 2>&1
-)
+#(
+#echo "starting to build mailbox/api" >> $BUILD_OUTPUT 2>&1
+#cd mailbox/api >> $BUILD_OUTPUT 2>&1
+#../../mvnw install >> $BUILD_OUTPUT 2>&1
+#)
 
 
 # The build finished without returning an error so dump a tail of the output
