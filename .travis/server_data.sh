@@ -28,38 +28,33 @@ PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
 (
-cd server/container/cli && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/cli-integration && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/core && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-file && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/filesystem-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-jdbc && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/guice && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/lifecycle-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-jmap-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/mailbox-adapter && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-ldap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/mailbox-jmx && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/container/metrics/metrics-es-reporter && ../../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/data/data-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
-(
-cd server/container/spring && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/container/util && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+
 
 
 # The build finished without returning an error so dump a tail of the output

@@ -27,32 +27,21 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
+
+echo "install mailbox as it is needed by imap4" >> $BUILD_OUTPUT 2>&1
+( cd $WORKDIR/../mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
+
 (
-cd server/data/data-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/protocols/jwt && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/data/data-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/protocols/protocols-imap4 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/data/data-file && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/protocols/protocols-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 (
-cd server/data/data-jdbc && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/data/data-jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/data/data-jmap-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/data/data-ldap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/data/data-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/data/data-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+cd $WORKDIR/../server/protocols/protocols-lmtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
 )
 
 

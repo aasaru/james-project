@@ -23,22 +23,14 @@ trap 'error_handler' ERR
 
 # Set up a repeating loop to send some output to Travis.
 
-bash -c "while true; do echo \$(date) - running mail tests ...; sleep $PING_SLEEP; done" &
+bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# Add actual commands here
-(
-echo "starting to build json" >> $BUILD_OUTPUT 2>&1
-cd json >> $BUILD_OUTPUT 2>&1
-../mvnw install >> $BUILD_OUTPUT 2>&1
-)
-
-(
-echo "starting to build backends-common" >> $BUILD_OUTPUT 2>&1
-cd backends-common >> $BUILD_OUTPUT 2>&1
-../mvnw install >> $BUILD_OUTPUT 2>&1
-)
-
+# ADD COMMANDS HERE
+( cd $WORKDIR/../core && ../mvnw -T 1C  --no-transfer-progress test )
+( cd $WORKDIR/../javax-mail-extension && ../mvnw -T 1C  --no-transfer-progress test )
+( cd $WORKDIR/../mdn && ../mvnw -T 1C  --no-transfer-progress test )
+( cd $WORKDIR/../metrics && ../mvnw -T 1C  --no-transfer-progress test )
 
 
 

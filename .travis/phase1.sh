@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 # Travis has a 4MB limitation for log length.
-# For this reason we write the output to a separate file
+# For this reason we write the output to a separate file and only show tail of this file.
 
-#Exit immediately if a command exits with a non-zero status.
 set -e
 
 export PING_SLEEP=120s
 export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export BUILD_OUTPUT=$WORKDIR/travis_console.log
-
-echo 'WORKDIR:'
-echo $WORKDIR
 
 touch $BUILD_OUTPUT
 
@@ -30,10 +26,9 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-pwd
 (cd $WORKDIR/.. && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
 
-# The build finished without returning an error so dump a tail of the output
+echo BUILD PASSED.
 dump_output
 
 # terminate the ping output loop

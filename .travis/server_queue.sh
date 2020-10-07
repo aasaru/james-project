@@ -27,10 +27,13 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
-( cd server/dns-service/dnsservice-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/dns-service/dnsservice-dnsjava && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/dns-service/dnsservice-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/dns-service/dnsservice-test && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-activemq && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-file && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-jms && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/queue/queue-rabbitmq && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
 
 # The build finished without returning an error so dump a tail of the output
 dump_output

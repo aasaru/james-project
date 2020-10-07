@@ -27,24 +27,13 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
-(
-cd server/protocols/fetchmail && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-draft && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-draft-integration-testing && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-rfc-8621 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd server/protocols/jmap-rfc-8621-integration-tests && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+( cd $WORKDIR/../server/mailet/dkim && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailet/mailetcontainer-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailet/mailetcontainer-camel && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailet/mailets && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailet/mock-smtp-server && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailet/integration-testing && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
 
 # The build finished without returning an error so dump a tail of the output
 dump_output

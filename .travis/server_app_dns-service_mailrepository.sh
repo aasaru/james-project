@@ -27,12 +27,18 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
-( cd server/mailet/dkim && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/mailet/mailetcontainer-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/mailet/mailetcontainer-camel && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/mailet/mailets && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/mailet/mock-smtp-server && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/mailet/integration-testing && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
+# ADD COMMANDS HERE
+( cd $WORKDIR/../server/app && ../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
+( cd $WORKDIR/../server/dns-service/dnsservice-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/dns-service/dnsservice-dnsjava && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/dns-service/dnsservice-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/dns-service/dnsservice-test && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
+( cd $WORKDIR/../server/mailrepository/mailrepository-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailrepository/mailrepository-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+( cd $WORKDIR/../server/mailrepository/mailrepository-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
 
 
 # The build finished without returning an error so dump a tail of the output

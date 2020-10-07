@@ -27,12 +27,26 @@ bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep 
 PING_LOOP_PID=$!
 
 # ADD COMMANDS HERE
-( cd server/queue/queue-activemq && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/queue/queue-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/queue/queue-file && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/queue/queue-jms && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/queue/queue-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd server/queue/queue-rabbitmq && ../../../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
+echo "install mailbox as it is needed by imap4" >> $BUILD_OUTPUT 2>&1
+( cd $WORKDIR/../mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
+
+(
+cd $WORKDIR/../server/protocols/protocols-managesieve && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+)
+(
+cd $WORKDIR/../server/protocols/protocols-pop3 && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+)
+(
+cd $WORKDIR/../server/protocols/protocols-smtp && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+)
+#(
+#cd $WORKDIR/../server/protocols/webadmin && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+#(
+#cd $WORKDIR/../server/protocols/webadmin-integration-test && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
+#)
+
 
 
 # The build finished without returning an error so dump a tail of the output

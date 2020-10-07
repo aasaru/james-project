@@ -23,19 +23,11 @@ trap 'error_handler' ERR
 
 # Set up a repeating loop to send some output to Travis.
 
-bash -c "while true; do echo \$(date) - running mail tests ...; sleep $PING_SLEEP; done" &
+bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# Add actual commands here
-echo "starting to install mailbox" >> $BUILD_OUTPUT 2>&1
-( cd mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
-echo "starting to test mailet" >> $BUILD_OUTPUT 2>&1
-( cd mailet && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
-echo "starting to test examples" >> $BUILD_OUTPUT 2>&1
-( cd examples && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
-
-
-
+# ADD COMMANDS HERE
+cd $WORKDIR/../server/testing && ../../mvnw test >> $BUILD_OUTPUT 2>&1
 
 # The build finished without returning an error so dump a tail of the output
 dump_output
