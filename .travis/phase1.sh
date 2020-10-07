@@ -31,7 +31,7 @@ bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
 pwd
-(cd $WORKDIR && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
+(cd $WORKDIR/.. && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
 
 # The build finished without returning an error so dump a tail of the output
 dump_output
