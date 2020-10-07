@@ -39,24 +39,24 @@ jobs:
       script: .travis/phase1.sh
 
     - stage: run test in parallel (starting with ones that run the longest)
-      script: ./server_protocols.sh
-    - script: ./server_protocols2.sh
-    - script: ./server_container.sh
-    - script: ./server_protocols3.sh
-    - script: ./mailbox_mailet_examples.sh
-    - script: ./server_protocols4.sh
+      script: .travis/server_protocols.sh
+    - script: .travis/server_protocols2.sh
+    - script: .travis/server_container.sh
+    - script: .travis/server_protocols3.sh
+    - script: .travis/mailbox_mailet_examples.sh
+    - script: .travis/server_protocols4.sh
     - script: cd mpt && ../mvnw -T 1C  --no-transfer-progress test
-    - script: ./json_backends-common.sh
-    - script: ./server_blob.sh
-    - script: ./server_data.sh
-    - script: ./server_app_dns-service_mailrepository.sh
-    - script: ./server_mailet.sh
-    - script: ./server_queue.sh
-    - script: ./server_task.sh
+    - script: .travis/json_backends-common.sh
+    - script: .travis/server_blob.sh
+    - script: .travis/server_data.sh
+    - script: .travis/server_app_dns-service_mailrepository.sh
+    - script: .travis/server_mailet.sh
+    - script: .travis/server_queue.sh
+    - script: .travis/server_task.sh
     - script: cd third-party && ../mvnw -T 1C  --no-transfer-progress test
     - script: cd event-sourcing && ../mvnw -T 1C  --no-transfer-progress test
-    - script: ./server_testing.sh
-    - script: ./misc.sh
+    - script: .travis/server_testing.sh
+    - script: .travis/misc.sh
 
 
 
