@@ -18,7 +18,9 @@
 
 dist: bionic
 
-language: generic
+language: java
+jdk:
+  - openjdk8
 
 services:
   - docker
