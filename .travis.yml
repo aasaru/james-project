@@ -37,14 +37,15 @@ cache:
   directories:
     - $HOME/.m2
 
-
 jobs:
   include:
     - stage: compile and install dependencies into $HOME/.m2
       script: .travis/compile_and_install.sh
+      name: compile_and_install.sh
 
     - stage: run test in parallel (starting with ones that run the longest)
-      if: type != pull_request
+      # Comment in if we don't want to run tests for pull requests
+      # if: type != pull_request
       script: .travis/server_protocols.sh
       name: server_protocols.sh
     - script: .travis/server_protocols2.sh
@@ -54,31 +55,24 @@ jobs:
     - script: .travis/server_protocols3.sh
       name: server_protocols3.sh
     - script: .travis/mailbox_mailet_examples.sh
-      name: mailbox_mailet_examples
+      name: mailbox_mailet_examples.sh
     - script: .travis/server_protocols4.sh
-      name: server_protocols4
+      name: server_protocols4.sh
     - script: .travis/mpt.sh
-      name: mpt
+      name: mpt.sh
     - script: .travis/server_blob.sh
-      name: server_blob
+      name: server_blob.sh
     - script: .travis/server_app_dns-service_mailrepository_task.sh
-      name: server_app_dns-service_mailrepository_task
+      name: server_app_dns-service_mailrepository_task.sh
     - script: .travis/misc.sh
-      name: misc
+      name: misc.sh
     - script: .travis/json_backends-common.sh
-      name: json_backends-common
+      name: json_backends-common.sh
     - script: .travis/server_data.sh
-      name: server_data
+      name: server_data.sh
     - script: .travis/server_mailet_testing.sh
-      name: server_mailet_testing
+      name: server_mailet_testing.sh
     - script: .travis/server_queue.sh
-      if: type = pull_request
-      name: server_queue
-
-
-
-
-
-
+      name: server_queue.sh
 
 

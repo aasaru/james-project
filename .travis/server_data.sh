@@ -32,7 +32,7 @@ PING_LOOP_PID=$!
 ( cd $ROOTDIR/server/data/data-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/data/data-file && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/data/data-jdbc && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-jmap && ../../../mvnw -T 1C --no-transfer-progresstest >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jmap && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/data/data-jmap-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/data/data-ldap && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/data/data-library && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )

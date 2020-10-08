@@ -28,6 +28,10 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
+
+# We need mailbox-test artifact
+( cd $ROOTDIR/mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
+
 ( cd $ROOTDIR/server/protocols/webadmin && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/protocols/webadmin-integration-test && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 

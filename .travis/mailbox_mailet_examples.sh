@@ -33,8 +33,8 @@ PING_LOOP_PID=$!
 ( cd $ROOTDIR/mailbox && ../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
 
 # now run tests
-( cd $ROOTDIR/mailet && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/examples && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/mailet && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/examples && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output

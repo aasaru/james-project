@@ -28,9 +28,6 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-# install mailbox as it is needed... TODO
-#( cd $ROOTDIR/mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
-
 ( cd $ROOTDIR/server/protocols/protocols-managesieve && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/protocols/protocols-pop3 && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/protocols/protocols-smtp && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
