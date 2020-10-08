@@ -6,8 +6,8 @@
 set -e
 
 export PING_SLEEP=120s
-export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export BUILD_OUTPUT=$WORKDIR/travis_console.log
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 
 touch $BUILD_OUTPUT
 
@@ -27,7 +27,7 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-(cd $WORKDIR/.. && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
+(cd $ROOTDIR && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
 
 echo BUILD PASSED.
 dump_output
