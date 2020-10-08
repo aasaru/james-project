@@ -54,23 +54,26 @@ jobs:
       name: server_container.sh
     - script: .travis/server_protocols3.sh
       name: server_protocols3.sh
+    - script: .travis/server_protocols4.sh
+      name: server_protocols4.sh
     - script: .travis/mailbox_mailet_examples.sh
       name: mailbox_mailet_examples.sh
-    - script: .travis/mpt.sh
-      name: mpt.sh
+    - script: .travis/mpt_protocols.sh
+      name: mpt_protocols.sh
     - script: .travis/server_blob.sh
       name: server_blob.sh
     - script: .travis/server_app_dns-service_mailrepository_task.sh
       name: server_app_dns-service_mailrepository_task.sh
+    - script: .travis/server_queue.sh
+      name: server_queue.sh
+    - script: .travis/server_data.sh
+      name: server_data.sh
     - script: .travis/misc.sh
       name: misc.sh
     - script: .travis/json_backends-common.sh
       name: json_backends-common.sh
-    - script: .travis/server_data.sh
-      name: server_data.sh
     - script: .travis/server_mailet_testing.sh
       name: server_mailet_testing.sh
-    - script: .travis/server_queue.sh
-      name: server_queue.sh
+
 
 

@@ -30,19 +30,19 @@ PING_LOOP_PID=$!
 # Actual commands to run tests
 ( cd $ROOTDIR/server/app && ../../mvnw test >> $BUILD_OUTPUT 2>&1 )
 
-( cd $ROOTDIR/server/dns-service/dnsservice-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/dns-service/dnsservice-dnsjava && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/dns-service/dnsservice-library && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/dns-service/dnsservice-test && ../../../mvnw test -T 1C --no-transfer-progress >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/dns-service/dnsservice-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/dns-service/dnsservice-dnsjava && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/dns-service/dnsservice-library && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/dns-service/dnsservice-test && ../../../mvnw test --no-transfer-progress >> $BUILD_OUTPUT 2>&1 )
 
-( cd $ROOTDIR/server/mailrepository/mailrepository-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailrepository/mailrepository-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailrepository/mailrepository-memory && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/mailrepository/mailrepository-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/mailrepository/mailrepository-cassandra && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/mailrepository/mailrepository-memory && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
-( cd $ROOTDIR/server/task/task-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/task/task-distributed && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/task/task-json && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/task/task-memory && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/task/task-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/task/task-distributed && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/task/task-json && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/task/task-memory && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 
 echo BUILD PASSED.

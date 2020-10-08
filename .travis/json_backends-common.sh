@@ -28,8 +28,8 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $ROOTDIR/json && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/backends-common && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/json && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/backends-common && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output

@@ -28,15 +28,15 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $ROOTDIR/server/data/data-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-file && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-jdbc && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-jmap && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-jmap-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-ldap && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-library && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/data/data-memory && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-cassandra && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-file && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jdbc && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jmap && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jmap-cassandra && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-ldap && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-library && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-memory && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 
 echo BUILD PASSED.

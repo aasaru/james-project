@@ -28,12 +28,12 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $ROOTDIR/server/queue/queue-activemq && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/queue/queue-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/queue/queue-file && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/queue/queue-jms && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/queue/queue-memory && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/queue/queue-rabbitmq && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-activemq && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-file && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-jms && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-memory && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/queue/queue-rabbitmq && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output

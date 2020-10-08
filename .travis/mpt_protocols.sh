@@ -28,12 +28,8 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $ROOTDIR/server/protocols/fetchmail && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/jmap && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/jmap-draft && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/jmap-draft-integration-testing && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/jmap-rfc-8621 && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/jmap-rfc-8621-integration-tests && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/mpt && ../mvnw --no-transfer-progress test )
+( cd $ROOTDIR/protocols && ../mvnw --no-transfer-progress test )
 
 echo BUILD PASSED.
 dump_output
