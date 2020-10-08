@@ -6,8 +6,8 @@
 set -e
 
 export PING_SLEEP=120s
-export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export BUILD_OUTPUT=$WORKDIR/travis_console.log
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 
 touch $BUILD_OUTPUT
 
@@ -28,12 +28,12 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $WORKDIR/../third-party && ../mvnw -T 1C  --no-transfer-progress test )
-( cd $WORKDIR/../event-sourcing && ../mvnw -T 1C  --no-transfer-progress test )
-( cd $WORKDIR/../core && ../mvnw -T 1C  --no-transfer-progress test )
-( cd $WORKDIR/../javax-mail-extension && ../mvnw -T 1C  --no-transfer-progress test )
-( cd $WORKDIR/../mdn && ../mvnw -T 1C  --no-transfer-progress test )
-( cd $WORKDIR/../metrics && ../mvnw -T 1C  --no-transfer-progress test )
+( cd $ROOTDIR/third-party && ../mvnw -T 1C --no-transfer-progress test )
+( cd $ROOTDIR/event-sourcing && ../mvnw -T 1C --no-transfer-progress test )
+( cd $ROOTDIR/core && ../mvnw -T 1C --no-transfer-progress test )
+( cd $ROOTDIR/javax-mail-extension && ../mvnw -T 1C --no-transfer-progress test )
+( cd $ROOTDIR/mdn && ../mvnw -T 1C --no-transfer-progress test )
+( cd $ROOTDIR/metrics && ../mvnw -T 1C --no-transfer-progress test )
 
 echo BUILD PASSED.
 dump_output

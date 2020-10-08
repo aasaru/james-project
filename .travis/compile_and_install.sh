@@ -27,7 +27,7 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - building ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-(cd $ROOTDIR && ./mvnw -DskipTests=true install >> $BUILD_OUTPUT 2>&1)
+(cd $ROOTDIR && ./mvnw -DskipTests=true --no-transfer-progress install >> $BUILD_OUTPUT 2>&1)
 
 echo BUILD PASSED.
 dump_output

@@ -1,11 +1,13 @@
 #!/bin/bash
-# https://stackoverflow.com/a/26082445/158257
+# Travis-CI has a 4MB limitation for log length.
+# For this reason we write the output to a separate file and only show tail of this file.
+
 # Abort on Error
 set -e
 
 export PING_SLEEP=120s
-export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export BUILD_OUTPUT=$WORKDIR/build.out
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 
 touch $BUILD_OUTPUT
 
@@ -21,44 +23,24 @@ error_handler() {
 # If an error occurs, run our error handler to output a tail of the build
 trap 'error_handler' ERR
 
-# Set up a repeating loop to send some output to Travis.
-
-bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep $PING_SLEEP; done" &
+# Set up a repeating loop to send some output to Travis (so it would consider the process alive)
+bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# ADD COMMANDS HERE
-(
-cd $WORKDIR/../server/data/data-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-file && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-jdbc && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-jmap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-jmap-cassandra && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-ldap && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-library && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/data/data-memory && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+# Actual commands to run tests
+( cd $ROOTDIR/server/data/data-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-file && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jdbc && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jmap && ../../../mvnw -T 1C --no-transfer-progresstest >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-jmap-cassandra && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-ldap && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-library && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/data/data-memory && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 
-
-# The build finished without returning an error so dump a tail of the output
+echo BUILD PASSED.
 dump_output
 
-# nicely terminate the ping output loop
+# terminate the ping output loop
 kill $PING_LOOP_PID

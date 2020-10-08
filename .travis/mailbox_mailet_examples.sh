@@ -6,8 +6,8 @@
 set -e
 
 export PING_SLEEP=120s
-export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export BUILD_OUTPUT=$WORKDIR/travis_console.log
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 
 touch $BUILD_OUTPUT
 
@@ -28,9 +28,13 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $WORKDIR/../mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
-( cd $WORKDIR/../mailet && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
-( cd $WORKDIR/../examples && ../mvnw test >> $BUILD_OUTPUT 2>&1 )
+
+# first build and install dependency apache-mailet-test
+( cd $ROOTDIR/mailbox && ../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
+
+# now run tests
+( cd $ROOTDIR/mailet && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/examples && ../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output

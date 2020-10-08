@@ -1,11 +1,13 @@
 #!/bin/bash
-# https://stackoverflow.com/a/26082445/158257
+# Travis-CI has a 4MB limitation for log length.
+# For this reason we write the output to a separate file and only show tail of this file.
+
 # Abort on Error
 set -e
 
 export PING_SLEEP=120s
-export WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export BUILD_OUTPUT=$WORKDIR/build.out
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 
 touch $BUILD_OUTPUT
 
@@ -21,49 +23,25 @@ error_handler() {
 # If an error occurs, run our error handler to output a tail of the build
 trap 'error_handler' ERR
 
-# Set up a repeating loop to send some output to Travis.
-
-bash -c "while true; do echo \$(date) - running server/testing tests ...; sleep $PING_SLEEP; done" &
+# Set up a repeating loop to send some output to Travis (so it would consider the process alive)
+bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
-# ADD COMMANDS HERE
-(
-cd $WORKDIR/../server/container/cli && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/cli-integration && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/core && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/filesystem-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/guice && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/lifecycle-api && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/mailbox-adapter && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/mailbox-jmx && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/metrics/metrics-es-reporter && ../../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/spring && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
-(
-cd $WORKDIR/../server/container/util && ../../../mvnw test >> $BUILD_OUTPUT 2>&1
-)
+# Actual commands to run tests
+( cd $ROOTDIR/server/container/cli && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/cli-integration && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/core && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/filesystem-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/guice && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/lifecycle-api && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/mailbox-adapter && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/mailbox-jmx && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/metrics/metrics-es-reporter && ../../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/spring && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/container/util && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
-
-# The build finished without returning an error so dump a tail of the output
+echo BUILD PASSED.
 dump_output
 
-# nicely terminate the ping output loop
+# terminate the ping output loop
 kill $PING_LOOP_PID

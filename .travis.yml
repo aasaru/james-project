@@ -44,10 +44,11 @@ jobs:
       script: .travis/compile_and_install.sh
 
     - stage: run test in parallel (starting with ones that run the longest)
+      if: type != pull_request
       script: .travis/server_protocols.sh
       name: server_protocols.sh
     - script: .travis/server_protocols2.sh
-      name: server_protocols2.sh
+      name: server_protocols2.sh (only if not PR)
     - script: .travis/server_container.sh
       name: server_container.sh
     - script: .travis/server_protocols3.sh
@@ -58,24 +59,22 @@ jobs:
       name: server_protocols4
     - script: .travis/mpt.sh
       name: mpt
+    - script: .travis/server_blob.sh
+      name: server_blob
+    - script: .travis/server_app_dns-service_mailrepository_task.sh
+      name: server_app_dns-service_mailrepository_task
     - script: .travis/misc.sh
       name: misc
     - script: .travis/json_backends-common.sh
       name: json_backends-common
-    - script: .travis/server_blob.sh
-      name: server_blob
     - script: .travis/server_data.sh
       name: server_data
-    - script: .travis/server_app_dns-service_mailrepository.sh
-      name: server_app_dns-service_mailrepository
-    - script: .travis/server_mailet.sh
-      name: server_mailet
+    - script: .travis/server_mailet_testing.sh
+      name: server_mailet_testing
     - script: .travis/server_queue.sh
+      if: type = pull_request
       name: server_queue
-    - script: .travis/server_task.sh
-      name: server_task
-    - script: .travis/server_testing.sh
-      name: server_testing
+
 
 
 
