@@ -49,15 +49,13 @@ jobs:
       script: .travis/server_protocols.sh
       name: server_protocols.sh
     - script: .travis/server_protocols2.sh
-      name: server_protocols2.sh (only if not PR)
+      name: server_protocols2.sh
     - script: .travis/server_container.sh
       name: server_container.sh
     - script: .travis/server_protocols3.sh
       name: server_protocols3.sh
     - script: .travis/mailbox_mailet_examples.sh
       name: mailbox_mailet_examples.sh
-    - script: .travis/server_protocols4.sh
-      name: server_protocols4.sh
     - script: .travis/mpt.sh
       name: mpt.sh
     - script: .travis/server_blob.sh

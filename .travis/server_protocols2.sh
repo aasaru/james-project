@@ -31,10 +31,15 @@ PING_LOOP_PID=$!
 # We need mailbox-test artifact
 ( cd $ROOTDIR/mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
 
-( cd $ROOTDIR/server/protocols/jwt && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/protocols-imap4 && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/protocols-library && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/protocols/protocols-lmtp && ../../../mvnw -T 1C --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/jwt && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/protocols-imap4 && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/protocols-library && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/protocols-lmtp && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+
+( cd $ROOTDIR/server/protocols/protocols-managesieve && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/protocols-pop3 && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/protocols-smtp && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+
 
 echo BUILD PASSED.
 dump_output
