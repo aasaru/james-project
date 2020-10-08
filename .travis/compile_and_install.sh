@@ -2,6 +2,7 @@
 # Travis has a 4MB limitation for log length.
 # For this reason we write the output to a separate file and only show tail of this file.
 
+# Abort on Error
 set -e
 
 export PING_SLEEP=120s
