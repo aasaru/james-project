@@ -2807,7 +2807,7 @@ trait MailboxSetMethodContract {
          |      "notDestroyed": {
          |        "#C42": {
          |          "type": "invalidArguments",
-         |          "description": "#C42 is not a mailboxId: ClientId(#C42) was not used in previously defined creationIds"
+         |          "description": "#C42 is not a mailboxId: #C42 was not used in previously defined creationIds"
          |        }
          |      }
          |    }, "c2"],
@@ -2881,7 +2881,7 @@ trait MailboxSetMethodContract {
          |      "notDestroyed": {
          |        "#C42": {
          |          "type": "invalidArguments",
-         |          "description": "#C42 is not a mailboxId: ClientId(#C42) was not used in previously defined creationIds"
+         |          "description": "#C42 is not a mailboxId: #C42 was not used in previously defined creationIds"
          |        }
          |      }
          |    }, "c2"]
@@ -2919,7 +2919,7 @@ trait MailboxSetMethodContract {
       .body
       .asString
 
-    val message = "# is not a mailboxId: Left predicate of ((!(0 < 1) && !(0 > 255)) && \\\"\\\".matches(\\\"^[#a-zA-Z0-9-_]*$\\\")) failed: Predicate taking size() = 0 failed: Left predicate of (!(0 < 1) && !(0 > 255)) failed: Predicate (0 < 1) did not fail."
+    val message = "# is not a mailboxId: # was not used in previously defined creationIds"
     assertThatJson(response).isEqualTo(
       s"""{
          |  "sessionState": "75128aab4b1b",
@@ -6728,7 +6728,7 @@ trait MailboxSetMethodContract {
          |      "notUpdated": {
          |        "${mailboxId.serialize}": {
          |          "type": "invalidArguments",
-         |          "description": "ClientId(#C42) was not used in previously defined creationIds",
+         |          "description": "#C42 was not used in previously defined creationIds",
          |          "properties": ["parentId"]
          |        }
          |      }
@@ -7311,6 +7311,59 @@ trait MailboxSetMethodContract {
          |      "description": "Missing capability(ies): urn:ietf:params:jmap:core, urn:ietf:params:jmap:mail"
          |    },
          |    "c1"]]
+         |}""".stripMargin)
+  }
+
+  @Test
+  def updateShouldHandleNotFoundClientId(server: GuiceJamesServer): Unit = {
+    val mailboxProbe = server.getProbe(classOf[MailboxProbeImpl])
+    val mailboxId: MailboxId = mailboxProbe.createMailbox(MailboxPath.forUser(BOB, "mailbox"))
+
+    val response = `given`
+      .header(ACCEPT.toString, ACCEPT_RFC8621_VERSION_HEADER)
+      .body(s"""{
+               |  "using": [ "urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail" ],
+               |  "methodCalls": [
+               |    [
+               |     "Mailbox/set",
+               |     {
+               |       "accountId": "29883977c13473ae7cb7678ef767cbfbaffc8a44a6e463d971d23a65c1dc4af6",
+               |       "update": {
+               |         "#invalid": {
+               |           "name": "newName"
+               |         }
+               |       }
+               |     },
+               |     "c1"]]
+               |}""".stripMargin)
+    .when
+      .post
+    .`then`
+      .statusCode(SC_OK)
+      .contentType(JSON)
+      .extract
+      .body
+      .asString
+
+    assertThatJson(response).isEqualTo(
+      s"""{
+         |    "sessionState": "75128aab4b1b",
+         |    "methodResponses": [
+         |        [
+         |            "Mailbox/set",
+         |            {
+         |                "accountId": "29883977c13473ae7cb7678ef767cbfbaffc8a44a6e463d971d23a65c1dc4af6",
+         |                "newState": "000001",
+         |                "notUpdated": {
+         |                    "#invalid": {
+         |                        "type": "invalidArguments",
+         |                        "description": "#invalid was not used in previously defined creationIds"
+         |                    }
+         |                }
+         |            },
+         |            "c1"
+         |        ]
+         |    ]
          |}""".stripMargin)
   }
 }

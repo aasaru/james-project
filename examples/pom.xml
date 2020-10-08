@@ -21,13 +21,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.james</groupId>
-        <artifactId>james-project</artifactId>
-        <version>3.6.0-SNAPSHOT</version>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>23</version>
+        <relativePath></relativePath>
     </parent>
 
     <packaging>pom</packaging>
+    <groupId>org.apache.james.examples</groupId>
     <artifactId>examples</artifactId>
+    <version>3.6.0-SNAPSHOT</version>
 
     <name>Apache James :: Examples</name>
 
@@ -35,5 +38,13 @@
         <module>custom-listeners</module>
         <module>custom-mailets</module>
     </modules>
+
+    <properties>
+        <james.groupId>org.apache.james</james.groupId>
+        <james.baseVersion>${project.version}</james.baseVersion>
+
+        <maven.compiler.target>1.11</maven.compiler.target>
+        <maven.compiler.source>1.11</maven.compiler.source>
+    </properties>
 
 </project>

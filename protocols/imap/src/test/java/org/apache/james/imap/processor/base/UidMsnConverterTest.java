@@ -23,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Duration;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.james.mailbox.MessageUid;
 import org.apache.james.mailbox.NullableMessageSequenceNumber;
@@ -32,8 +34,6 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-
-import io.vavr.Tuple;
 
 public class UidMsnConverterTest {
     private UidMsnConverter testee;
@@ -64,20 +64,22 @@ public class UidMsnConverterTest {
     }
 
     @Test
-    public void getUidShouldReturnEmptyIfOutOfRange() {
-        testee.addUid(messageUid1);
-        testee.addUid(messageUid2);
+    public void loopingGetMSNShouldSucceedForAMillionItems() {
+        int count = 1000;
+        testee.addAll(IntStream.range(0, count)
+            .mapToObj(i -> MessageUid.of(i + 1))
+            .collect(Collectors.toList()));
 
-        assertThat(testee.getUid(50))
-            .isEmpty();
+        IntStream.range(0, 1000000)
+            .forEach(i -> testee.getMsn(MessageUid.of(i + 1)));
     }
 
     @Test
-    public void getUidShouldReturnTheCorrespondingUidIfItExist() {
-        testee.addAll(ImmutableList.of(messageUid1, messageUid2));
+    public void getUidShouldTheCorrespondingUidIfItExist() {
+        testee.addUid(messageUid1);
 
-        assertThat(testee.getUid(2))
-            .contains(messageUid2);
+        assertThat(testee.getUid(1))
+            .contains(messageUid1);
     }
 
     @Test
@@ -458,7 +460,11 @@ public class UidMsnConverterTest {
     }
 
     private Map<Integer, MessageUid> mapTesteeInternalDataToMsnByUid() {
-        return testee.uids.zipWithIndex().toMap(input -> Tuple.of(input._2 + 1, input._1)).toJavaMap();
+        ImmutableMap.Builder<Integer, MessageUid> result = ImmutableMap.builder();
+        for (int i = 0; i < testee.uids.size(); i++) {
+            result.put(i + 1, testee.uids.get(i));
+        }
+        return result.build();
     }
 
 }
