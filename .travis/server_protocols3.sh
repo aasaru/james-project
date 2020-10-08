@@ -32,7 +32,7 @@ PING_LOOP_PID=$!
 # We need mailbox-test artifact
 ( cd $ROOTDIR/mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
 
-( cd $ROOTDIR/server/protocols/webadmin-integration-test && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/server/protocols/webadmin && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output
