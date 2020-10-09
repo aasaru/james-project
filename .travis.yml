@@ -22,7 +22,7 @@ language: generic
 
 services:
   - docker
-  - rabbitmq #RabbitMQEventBusDeadLetterQueueUpgradeTest
+  - rabbitmq
 
 before_install:
   - echo $JAVA_HOME
