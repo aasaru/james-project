@@ -27,6 +27,9 @@ trap 'error_handler' ERR
 bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; done" &
 PING_LOOP_PID=$!
 
+# To avoid {"message":"No such image: linagora/mock-smtp-server:latest"}
+docker pull linagora/mock-smtp-server:latest
+
 # Actual commands to run tests
 ( cd $ROOTDIR/server/mailet/dkim && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/mailet/mailetcontainer-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
