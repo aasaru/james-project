@@ -45,12 +45,14 @@ import org.apache.james.webadmin.WebAdminUtils;
 import org.apache.james.webadmin.routes.AliasRoutes;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import io.restassured.specification.RequestSpecification;
 
+@Ignore
 public class SenderIsLocalIntegrationTest {
     private static final String POSTMASTER = "postmaster@" + DEFAULT_DOMAIN;
     private static final MailRepositoryUrl LOCAL_SENDER_REPOSITORY = MailRepositoryUrl.from("memory://var/mail/local/sender/");

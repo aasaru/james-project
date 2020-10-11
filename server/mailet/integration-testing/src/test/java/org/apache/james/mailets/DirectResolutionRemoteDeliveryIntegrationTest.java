@@ -55,6 +55,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.collect.ImmutableList;
 
+@Ignore
 public class DirectResolutionRemoteDeliveryIntegrationTest {
     private static final String JAMES_ANOTHER_DOMAIN = "james.com";
     private static final String JAMES_ANOTHER_MX_DOMAIN_1 = "mx1.james.com";

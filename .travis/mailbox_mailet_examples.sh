@@ -12,8 +12,8 @@ export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 touch $BUILD_OUTPUT
 
 dump_output() {
-   echo Tailing the last 2000 lines of output:
-   tail -2000 $BUILD_OUTPUT
+   echo Tailing the last 4000 lines of output:
+   tail -4000 $BUILD_OUTPUT
 }
 error_handler() {
   echo ERROR: An error was encountered with the build.
@@ -30,11 +30,13 @@ PING_LOOP_PID=$!
 # Actual commands to run tests
 
 # first build and install dependency apache-mailet-test
-( cd $ROOTDIR/mailbox && ../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
+( cd $ROOTDIR/mailbox/event/event-rabbitmq  && ../../../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
 
-# now run tests
-( cd $ROOTDIR/mailet && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/examples && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/mailbox && ../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
+#
+## now run tests
+#( cd $ROOTDIR/mailet && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/examples && ../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 echo BUILD PASSED.
 dump_output

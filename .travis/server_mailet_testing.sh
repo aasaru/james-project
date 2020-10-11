@@ -12,8 +12,8 @@ export BUILD_OUTPUT=$ROOTDIR/travis_console.log
 touch $BUILD_OUTPUT
 
 dump_output() {
-   echo Tailing the last 2000 lines of output:
-   tail -2000 $BUILD_OUTPUT
+   echo Tailing the last 4000 lines of output:
+   tail -4000 $BUILD_OUTPUT
 }
 error_handler() {
   echo ERROR: An error was encountered with the build.
@@ -28,11 +28,11 @@ bash -c "while true; do echo \$(date) - running tests ...; sleep $PING_SLEEP; do
 PING_LOOP_PID=$!
 
 # Actual commands to run tests
-( cd $ROOTDIR/server/mailet/dkim && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailet/mailetcontainer-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailet/mailetcontainer-camel && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailet/mailets && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
-( cd $ROOTDIR/server/mailet/mock-smtp-server && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/server/mailet/dkim && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/server/mailet/mailetcontainer-api && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/server/mailet/mailetcontainer-camel && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/server/mailet/mailets && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/server/mailet/mock-smtp-server && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 ( cd $ROOTDIR/server/mailet/integration-testing && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 
 ( cd $ROOTDIR/server/testing && ../../mvnw test >> $BUILD_OUTPUT 2>&1 )

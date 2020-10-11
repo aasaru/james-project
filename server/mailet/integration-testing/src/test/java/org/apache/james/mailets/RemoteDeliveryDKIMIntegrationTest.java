@@ -59,12 +59,14 @@ import org.apache.james.utils.SMTPMessageSenderExtension;
 import org.apache.mailet.base.test.FakeMail;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+@Disabled
 class RemoteDeliveryDKIMIntegrationTest {
 
     private static final String JAMES_ANOTHER_DOMAIN = "james.com";
