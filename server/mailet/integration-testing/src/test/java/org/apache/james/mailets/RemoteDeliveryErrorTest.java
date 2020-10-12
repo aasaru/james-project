@@ -163,7 +163,7 @@ public class RemoteDeliveryErrorTest {
         mockSMTP2Configuration.cleanServer();
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldBounceWhenAlwaysRCPT421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -184,7 +184,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldBounceWhenAlwaysFROM421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -205,7 +205,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldBounceWhenAlwaysDATA421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -226,7 +226,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldNotRetryWhenRCPT500() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -247,7 +247,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldNotRetryWhenFROM500() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -268,7 +268,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldNotRetryWhenDATA500() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -289,7 +289,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldRetryWhenRCPT421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -311,7 +311,7 @@ public class RemoteDeliveryErrorTest {
                 }));
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldRetryWhenFROM421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -333,7 +333,7 @@ public class RemoteDeliveryErrorTest {
                 }));
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldRetryWhenDATA421() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -355,7 +355,7 @@ public class RemoteDeliveryErrorTest {
                 }));
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldNotDuplicateContentWhenSendPartial() throws Exception {
         mockSMTP1Configuration
             .addNewBehavior()
@@ -381,7 +381,7 @@ public class RemoteDeliveryErrorTest {
                 .containsOnly(FROM_RECIPIENT1_ENVELOPE, FROM_RECIPIENT2_ENVELOPE));
     }
 
-    @Test
+    //@Test
     public void remoteDeliveryShouldNotDuplicateContentWhenSendPartialWhenFailover() throws Exception {
         ImmutableList<InetAddress> addresses = ImmutableList.of(InetAddress.getByName(mockSmtp.getContainerIp()));
         ImmutableList<String> mxs = ImmutableList.of(mockSmtp.getContainerIp(), mockSmtp2.getContainerIp());

@@ -84,7 +84,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
         }
     }
 
-    @Test
+    ////@Test
     public void outgoingMailShouldTransitThroughGatewayWhenNoPort() throws Exception {
         String gatewayProperty = fakeSmtp.getContainer().getContainerIp();
 
@@ -105,7 +105,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
             .untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    ////@Test
     public void outgoingMailShouldTransitThroughGatewayWhenPort() throws Exception {
         String gatewayProperty = fakeSmtp.getContainer().getContainerIp() + ":25";
 
@@ -125,7 +125,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
         awaitAtMostOneMinute.untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    ////@Test
     public void outgoingMailShouldTransitThroughGatewayWhenSeveralIps() throws Exception {
         String gatewayProperty = fakeSmtp.getContainer().getContainerIp() + ",invalid.domain";
 
@@ -146,7 +146,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
             .untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    ////@Test
     public void outgoingMailShouldFallbackToSecondGatewayWhenFirstInvalid() throws Exception {
         String gatewayProperty = "invalid.domain," + fakeSmtp.getContainer().getContainerIp();
 
@@ -167,7 +167,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
             .untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    ////@Test
     public void outgoingMailShouldNotBeSentDirectlyToTheHostWhenGatewayFails() throws Exception {
         String gatewayProperty = "invalid.domain";
 
@@ -193,7 +193,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
         fakeSmtp.assertEmailReceived(response -> response.body("", hasSize(0)));
     }
 
-    @Test
+    ////@Test
     public void remoteDeliveryShouldBounceUponFailure() throws Exception {
         String gatewayProperty = "invalid.domain";
 
@@ -217,7 +217,7 @@ public class GatewayRemoteDeliveryIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    ////@Test
     public void remoteDeliveryShouldBounceUponFailureWhenNoBounceProcessor() throws Exception {
         String gatewayProperty = "invalid.domain";
 

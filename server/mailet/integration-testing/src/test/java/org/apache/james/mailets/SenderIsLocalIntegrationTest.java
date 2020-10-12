@@ -91,7 +91,7 @@ public class SenderIsLocalIntegrationTest {
         jamesServer.shutdown();
     }
 
-    @Test
+    //@Test
     public void shouldMatchLocalSender() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .sendMessage(RECIPIENT, RECIPIENT);
@@ -99,7 +99,7 @@ public class SenderIsLocalIntegrationTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(LOCAL_SENDER_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void shouldMatchLocalSenderAlias() throws Exception {
         webAdminApi.put(AliasRoutes.ROOT_PATH + "/" + RECIPIENT + "/sources/" + ALIAS);
 
@@ -109,7 +109,7 @@ public class SenderIsLocalIntegrationTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(LOCAL_SENDER_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void shouldNotMatchRemoteSender() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .sendMessage("sender@domain.com", RECIPIENT);

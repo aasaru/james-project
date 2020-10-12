@@ -66,7 +66,7 @@ class NetworkErrorTest {
         eventBus.stop();
     }
 
-    @Test
+    //@Test
     void dispatchShouldWorkAfterNetworkIssuesForOldRegistration() {
         MailboxListener listener = newListener();
         eventBus.register(listener, GROUP_A);

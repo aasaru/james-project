@@ -67,11 +67,11 @@ public class CommonMailetConfigurationTest {
         jamesServer.shutdown();
     }
 
-    @Test
+    //@Test
     public void startingJamesWithCommonMailetConfigurationShouldWork() throws Exception {
     }
 
-    @Test
+    //@Test
     public void simpleMailShouldBeSent() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .sendMessage(FROM, RECIPIENT);
@@ -82,7 +82,7 @@ public class CommonMailetConfigurationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void simpleMailShouldBeSentToUpperCaseRecipient() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .sendMessage(FROM, RECIPIENT.toUpperCase(Locale.US));

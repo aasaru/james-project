@@ -73,7 +73,7 @@ public class SieveDelivery {
         jamesServer.shutdown();
     }
 
-    @Test
+    //@Test
     public void simpleMailShouldBeSent() throws Exception {
         jamesServer.getProbe(SieveProbeImpl.class).addActiveSieveScript(RECIPIENT, "myscript.sieve",
             "require \"fileinto\";\n" +

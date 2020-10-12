@@ -73,7 +73,7 @@ public class MailetErrorsTest {
         }
     }
 
-    @Test
+    //@Test
     public void mailetProcessorsShouldHandleMessagingException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -93,7 +93,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void mailetProcessingShouldHandleClassNotFoundException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -113,7 +113,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void matcherProcessingShouldHandleClassNotFoundException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -133,7 +133,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void mailetProcessorsShouldHandleRuntimeException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -153,7 +153,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void spoolerShouldEventuallyProcessUponTemporaryError() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -177,7 +177,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void spoolerShouldEventuallyProcessMailsAfterThreadSuicide() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -201,7 +201,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void spoolerShouldNotInfinitLoopUponPermanentError() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -221,7 +221,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void mailetProcessorsShouldHandleMessagingExceptionWhenSpecificErrorHandlingSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -244,7 +244,7 @@ public class MailetErrorsTest {
 
     }
 
-    @Test
+    //@Test
     public void mailetProcessorsShouldHandleRuntimeExceptionWhenSpecificErrorHandlingSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -266,7 +266,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onExceptionIgnoreShouldContinueProcessingWhenRuntimeException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -292,7 +292,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onExceptionIgnoreShouldContinueProcessingWhenMessagingException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -318,7 +318,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void matcherProcessorsShouldHandleMessagingException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -338,7 +338,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void matcherProcessorsShouldHandleRuntimeException() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -358,7 +358,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void matcherProcessorsShouldHandleMessagingExceptionWhenSpecificErrorHandlingSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -380,7 +380,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void matcherProcessorsShouldHandleRuntimeExceptionWhenSpecificErrorHandlingSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -402,7 +402,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onMatcherExceptionIgnoreShouldNotMatchWhenRuntimeExceptionAndNoMatchConfigured() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -428,7 +428,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onMatcherExceptionIgnoreShouldNotMatchWhenMessagingExceptionAndNoMatchConfigured() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -454,7 +454,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onMatcherExceptionIgnoreShouldMatchWhenRuntimeExceptionAndAllMatchConfigured() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -480,7 +480,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void onMatcherExceptionIgnoreShouldMatchWhenMessagingExceptionAndAllMatchConfigured() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -506,7 +506,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
 
-    @Test
+    //@Test
     public void hasExceptionMatcherShouldMatchWhenMatcherThrowsExceptionSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -536,7 +536,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
     
-    @Test
+    //@Test
     public void hasExceptionMatcherShouldNotMatchWhenMatcherThrowsExceptionNotSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -566,7 +566,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(ERROR_REPOSITORY) == 1);
     }
     
-    @Test
+    //@Test
     public void hasExceptionMatcherShouldMatchWhenMailetThrowsExceptionSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)
@@ -596,7 +596,7 @@ public class MailetErrorsTest {
         awaitAtMostOneMinute.until(() -> probe.getRepositoryMailCount(CUSTOM_REPOSITORY) == 1);
     }
     
-    @Test
+    //@Test
     public void hasExceptionMatcherShouldNotMatchWhenMailetThrowsExceptionNotSpecified() throws Exception {
         jamesServer = TemporaryJamesServer.builder()
             .withBase(SMTP_ONLY_MODULE)

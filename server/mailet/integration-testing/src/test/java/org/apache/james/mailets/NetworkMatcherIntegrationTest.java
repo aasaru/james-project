@@ -89,7 +89,7 @@ public class NetworkMatcherIntegrationTest {
         jamesServer.shutdown();
     }
 
-    @Test
+    //@Test
     public void mailsFromAuthorizedNetworksShouldBeDeliveredWithRemoteAddrInNetwork() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -109,7 +109,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void mailsFromAuthorizedNetworksShouldBeDeliveredWithRemoteAddrNotInNetwork() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -129,7 +129,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void remoteAddrInNetworkShouldSupportLargerMask() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -149,7 +149,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void remoteAddrInNetworkShouldSupportRangesDefinedByAMiddleIp() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -169,7 +169,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void remoteAddrInNetworkShouldSupportRangesDefinedByEndingIp() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -189,7 +189,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void remoteAddrInNetworkShouldSupportRangesWithNonEightMultipleSubMasks() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -209,7 +209,7 @@ public class NetworkMatcherIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void mailsFromNonAuthorizedNetworksShouldNotBeDeliveredWithRemoteAddrInNetwork() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()
@@ -233,7 +233,7 @@ public class NetworkMatcherIntegrationTest {
             .isFalse();
     }
 
-    @Test
+    //@Test
     public void mailsFromNonAuthorizedNetworksShouldNotBeDeliveredWithRemoteAddrNotInNetwork() throws Exception {
         jamesServer = createJamesServerWithRootProcessor(ProcessorConfiguration.root()
             .addMailet(MailetConfiguration.builder()

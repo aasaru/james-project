@@ -103,7 +103,7 @@ public class SmtpAuthIntegrationTest {
         jamesServer.shutdown();
     }
 
-    @Test
+    //@Test
     public void authenticatedSmtpSessionsShouldBeDelivered() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .authenticate(FROM, PASSWORD)
@@ -115,7 +115,7 @@ public class SmtpAuthIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void nonAuthenticatedSmtpSessionsShouldNotBeDelivered() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .sendMessage(FROM, FROM);
@@ -129,7 +129,7 @@ public class SmtpAuthIntegrationTest {
             .isFalse();
     }
 
-    @Test
+    //@Test
     public void mixedCaseSenderMailShouldBeDelivered() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
             .authenticate(FROM, PASSWORD)

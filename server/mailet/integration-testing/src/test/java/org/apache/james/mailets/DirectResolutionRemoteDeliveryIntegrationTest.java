@@ -90,7 +90,7 @@ public class DirectResolutionRemoteDeliveryIntegrationTest {
         }
     }
 
-    @Test
+    //@Test
     public void directResolutionShouldBeWellPerformed() throws Exception {
         InMemoryDNSService inMemoryDNSService = new InMemoryDNSService()
             .registerMxRecord(JAMES_ANOTHER_DOMAIN, fakeSmtp.getContainer().getContainerIp());
@@ -115,7 +115,7 @@ public class DirectResolutionRemoteDeliveryIntegrationTest {
             .untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    //@Test
     public void directResolutionShouldFailoverOnSecondMxWhenFirstMxFailed() throws Exception {
         InMemoryDNSService inMemoryDNSService = new InMemoryDNSService()
             .registerRecord(JAMES_ANOTHER_DOMAIN, ADDRESS_EMPTY_LIST, JAMES_ANOTHER_MX_DOMAINS, RECORD_EMPTY_LIST)
@@ -142,7 +142,7 @@ public class DirectResolutionRemoteDeliveryIntegrationTest {
             .untilAsserted(this::assertMessageReceivedByTheSmtpServer);
     }
 
-    @Test
+    //@Test
     public void directResolutionShouldBounceUponUnreachableMxRecords() throws Exception {
         InMemoryDNSService inMemoryDNSService = new InMemoryDNSService()
             .registerRecord(JAMES_ANOTHER_DOMAIN, ADDRESS_EMPTY_LIST, ImmutableList.of("unknown"), RECORD_EMPTY_LIST);
@@ -169,7 +169,7 @@ public class DirectResolutionRemoteDeliveryIntegrationTest {
             .awaitMessage(awaitAtMostOneMinute);
     }
 
-    @Test
+    //@Test
     public void directResolutionShouldBounceWhenNoMxRecord() throws Exception {
         InMemoryDNSService inMemoryDNSService = new InMemoryDNSService()
             .registerRecord(JAMES_ANOTHER_DOMAIN, ADDRESS_EMPTY_LIST, RECORD_EMPTY_LIST, RECORD_EMPTY_LIST);
@@ -197,7 +197,7 @@ public class DirectResolutionRemoteDeliveryIntegrationTest {
     }
 
     @Ignore("JAMES-2913 PerRecipientHeaders are not handled by RemoteDelivery")
-    @Test
+    //@Test
     public void remoteDeliveryShouldAddPerRecipientHeaders() throws Exception {
         InMemoryDNSService inMemoryDNSService = new InMemoryDNSService()
             .registerMxRecord(JAMES_ANOTHER_DOMAIN, fakeSmtp.getContainer().getContainerIp());
