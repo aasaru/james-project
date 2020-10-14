@@ -25,12 +25,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.Flags;
+
 import org.apache.james.backends.cassandra.CassandraCluster;
 import org.apache.james.backends.cassandra.CassandraClusterExtension;
+import org.apache.james.backends.cassandra.StatementRecorder;
 import org.apache.james.backends.cassandra.init.configuration.CassandraConfiguration;
 import org.apache.james.core.Username;
 import org.apache.james.mailbox.MailboxSession;
 import org.apache.james.mailbox.MailboxSessionUtil;
+import org.apache.james.mailbox.MessageManager;
 import org.apache.james.mailbox.cassandra.CassandraMailboxSessionMapperFactory;
 import org.apache.james.mailbox.cassandra.TestCassandraMailboxSessionMapperFactory;
 import org.apache.james.mailbox.cassandra.ids.CassandraId;
@@ -83,6 +87,32 @@ class CassandraMessageIdMapperTest extends MessageIdMapperTest {
 
         assertThat(messages)
             .containsOnly(message1, message2, message3, message4);
+    }
+
+    @Test
+    void setFlagsShouldMinimizeMessageReads(CassandraCluster cassandra) throws Exception {
+        CassandraMessageId.Factory messageIdFactory = new CassandraMessageId.Factory();
+        CassandraMailboxSessionMapperFactory mapperFactory = TestCassandraMailboxSessionMapperFactory.forTests(
+            cassandraCluster.getCassandraCluster(),
+            messageIdFactory,
+            CassandraConfiguration.builder()
+                .messageReadChunkSize(3)
+                .build());
+
+        saveMessages();
+
+        StatementRecorder statementRecorder = new StatementRecorder();
+        cassandra.getConf().recordStatements(statementRecorder);
+
+        mapperFactory.getMessageIdMapper(MAILBOX_SESSION).setFlags(message1.getMessageId(),
+            ImmutableList.of(message1.getMailboxId()),
+            new Flags(Flags.Flag.DELETED),
+            MessageManager.FlagsUpdateMode.REPLACE);
+
+        assertThat(statementRecorder.listExecutedStatements(
+            StatementRecorder.Selector.preparedStatementStartingWith("SELECT messageId,mailboxId,uid,modSeq,flagAnswered,flagDeleted," +
+                "flagDraft,flagFlagged,flagRecent,flagSeen,flagUser,userFlags FROM imapUidTable")))
+            .hasSize(1);
     }
 
     @Nested

@@ -22,6 +22,8 @@ package org.apache.james.webadmin.integration.memory;
 import org.apache.james.JamesServerBuilder;
 import org.apache.james.JamesServerExtension;
 import org.apache.james.MemoryJamesServerMain;
+import org.apache.james.webadmin.RandomPortSupplier;
+import org.apache.james.webadmin.WebAdminConfiguration;
 import org.apache.james.webadmin.integration.WebAdminServerIntegrationTest;
 import org.apache.james.webadmin.integration.WebadminIntegrationTestModule;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -31,6 +33,14 @@ class MemoryWebAdminServerIntegrationTest extends WebAdminServerIntegrationTest 
     @RegisterExtension
     static JamesServerExtension jamesServerExtension = new JamesServerBuilder<>(JamesServerBuilder.defaultConfigurationProvider())
         .server(configuration -> MemoryJamesServerMain.createServer(configuration)
-            .overrideWith(new WebadminIntegrationTestModule()))
+            .overrideWith(new WebadminIntegrationTestModule())
+            .overrideWith(binder -> binder.bind(WebAdminConfiguration.class)
+                .toInstance(WebAdminConfiguration.builder()
+                    .enabled()
+                    .corsDisabled()
+                    .host("127.0.0.1")
+                    .port(new RandomPortSupplier())
+                    .additionalRoute("org.apache.james.webadmin.dropwizard.MetricsRoutes")
+                    .build())))
         .build();
 }

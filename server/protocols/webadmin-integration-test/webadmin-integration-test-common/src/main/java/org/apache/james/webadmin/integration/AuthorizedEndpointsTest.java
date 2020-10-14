@@ -52,6 +52,14 @@ public abstract class AuthorizedEndpointsTest {
     }
 
     @Test
+    void getMetricsShouldNotNeedAuthentication() {
+        when()
+            .get("/metrics")
+        .then()
+            .statusCode(not(HttpStatus.UNAUTHORIZED_401));
+    }
+
+    @Test
     void getSwaggerShouldNotNeedAuthentication() {
         when()
             .get(SwaggerRoutes.SWAGGER_ENDPOINT)

@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - JAMES-3296 Webadmin endpoint to rebuild RabbitMQMailQueue in the Distributed Server
 - JAMES-3266 Offer an option to disable ElasticSearch in Distributed James product
 - JAMES-3202 Reindex only outdated documents with the Mode option set to CORRECT in reindexing tasks
+- JAMES-3405 Expose metrics of Guice servers over HTTP - enables easy Prometheus metrics collection
+- JAMES-3407 Distributed server: Read-repairs for the mailbox entity
 
 ### Changed
 - Switch to Java 11 for build and run
@@ -33,6 +35,8 @@ Use BlobStore cache instead.
 ### Fixed
 - JAMES-3305 Avoid crashes upon deserialization issues when consuming RabbitMQ messages, leverage dead-letter feature
 - JAMES-3212 JMAP Handle subcrible/unsubcrible child's folder when update mailbox
+- JAMES-3416 Fix ElasticSearch email address search
+- JAMES-1677 Upgrade default hasing algorithm to SHA-512
 
 ### Removed
  - HybridBlobStore. This will be removed after 3.6.0 release. Introduced to fasten small blob access, its usage could be
