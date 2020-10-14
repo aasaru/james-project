@@ -1,4 +1,5 @@
 = Apache James Project
+:sectanchors:
 
 link:https://gitter.im/apache/james-project[image:https://badges.gitter.im/apache/james-project.svg[Join the chat at link:https://gitter.im/apache/james-project]]
 
