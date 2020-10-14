@@ -1,5 +1,4 @@
-Apache James Project
-====================
+= Apache James Project
 
 link:https://gitter.im/apache/james-project[image:https://badges.gitter.im/apache/james-project.svg[Join the chat at link:https://gitter.im/apache/james-project]]
 
@@ -37,28 +36,27 @@ https://issues.apache.org/jira/issues/?jql=project%20%3D%20JAMES%20AND%20resolut
 
 There is many other ways one can help us: packaging, communication, etc ...
 
-= How to...
+== Table of contents
 
- * link:#how-to-try-james[How to try James]
- * link:#how-to-check-the-compilation[How to check the compilation]
- * link:#how-to-run-james-in-docker[How to run James in Docker]
- ** link:#run-james-with-guice-%2Dcassandra-%2Drabbitmq-%2Ds3-%2Delasticsearch[Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
- ** link:#run-james-with-guice-%2Dcassandra-%2Delasticsearch[Run James with Guice + Cassandra + ElasticSearch]
- ** link:#run-james-with-guice-%2Djpa-%2Dlucene[Run James with Guice + JPA + Lucene]
- ** link:#run-james-with-spring-%2Djpa[Run James with Spring + JPA]
- * link:#other-useful-commands[Other Useful commands]
- ** link:#how-to-add-a-domain-[How to add a domain?]
- ** link:#how-to-add-a-user-[How to add a user?]
- ** link:#how-to-manage-sieve-scripts-[How to manage SIEVE scripts?]
- ** link:#how-to-retrieve-users-and-password-from-my-previous-container[How to retrieve users and password from my previous container?]
- * link:#develop-on-james[Develop on James]
- ** link:#how-to-run-deployment-tests[How to run deployment Tests]
- ** link:#how-to-check-the-merge-of-a-commit[How to check the merge of a commit]
- * link:#generating-a-package-for-james[Generating a package for James]
- * link:#know-more-about-james-design[Know more about James design]
- * link:#articles-for-james-community[Articles for James community]
- ** link:#how-to-build-and-publish-the-website[How to build and publish the website]
- ** link:#how-to-release-via-maven-release-plugin[How to release via maven release plugin]
+ * link:#_how_to_try_james[How to try James]
+ * link:#_how_to_check_the_compilation[How to check the compilation]
+ * link:#_how_to_run_james_in_docker[How to run James in Docker]
+ ** link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
+ ** link:#_run_james_with_guice_cassandra_elasticsearch[Run James with Guice + Cassandra + ElasticSearch]
+ ** link:#_run_james_with_guice_jpa_lucene[Run James with Guice + JPA + Lucene]
+ ** link:#_run_james_with_spring_jpa[Run James with Spring + JPA]
+ * link:#_other_useful_commands[Other Useful commands]
+ ** link:#_how_to_add_a_domain_[How to add a domain?]
+ ** link:#_how_to_add_a_user_[How to add a user?]
+ ** link:#_how_to_manage_sieve_scripts_[How to manage SIEVE scripts?]
+ ** link:#_how_to_retrieve_users_and_password_from_my_previous_container[How to retrieve users and password from my previous container?]
+ * link:#_develop_on_james[Develop on James]
+ ** link:#_how_to_build_james[How to build James]
+ ** link:#_how_to_run_deployment_tests[How to run deployment Tests]
+ ** link:#_how_to_check_the_merge_of_a_commit[How to check the merge of a commit]
+ * link:#_generating_a_package_for_james[Generating a package for James]
+ * link:#_know_more_about_james_design[Know more about James design]
+ * link:#_articles_for_james_community[Articles for James community]
 
 == How to try James
 
@@ -131,10 +129,10 @@ If you are using a a fresh installation of Docker, your DOCKER_HOST should be un
 
 This feature is available for three configurations :
 
- * link:#run-james-with-guice-%2Dcassandra-%2Drabbitmq-%2Ds3-%2Delasticsearch[Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
- * link:#run-james-with-guice-%2Dcassandra-%2Delasticsearch[Guice + Cassandra + ElasticSearch]
- * link:#run-james-with-guice-%2Djpa-%2Dlucene[Guice + JPA + Lucene]
- * link:#run-james-with-spring-%2Djpa[Spring + JPA]
+ * link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
+ * link:#_run_james_with_guice_cassandra_elasticsearch[Guice + Cassandra + ElasticSearch]
+ * link:#_run_james_with_guice_jpa_lucene[Guice + JPA + Lucene]
+ * link:#_run_james_with_spring_jpa[Spring + JPA]
 
 
 === Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch
@@ -401,14 +399,22 @@ Beware : you will have concurrency issues if multiple containers are running on 
 
 == Develop on James
 
-James requires at least JDK 11 and Maven 3.6.0 to build.
+=== How to build James
+
+James requires JDK 11 (or newer).
+The encouraged method for building and running tests is to use Maven wrapper from
+root directory by running:
+
+`./mvnw install` (when running from project root) or
+`../mvnw install` (when running from a subdirectory)
+
+mvnw (or mvnw.bat) is a small script that downloads the correct Maven distribution into .mvn/wrapper directory
+on first run and uses that.
+It is also possible to use locally installed Maven (3.6+) instead of Maven wrapper:
+
+`mvn install`
+
 Some parts of James are written in Scala so one might need to enable Scala plugin in IDE.
-
-=== How to run integration tests
-
-Integration tests use  https://www.testcontainers.org/[Testcontainers library]
-which uses https://docs.docker.com/machine/install-machine/[Docker Machine].
-Helpful installation instructions for Mac users: https://stackoverflow.com/a/49719638/158257
 
 === How to run deployment Tests
 
