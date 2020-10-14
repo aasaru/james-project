@@ -1,6 +1,4 @@
 = Apache James Project
-:sectanchors:
-:sectlinks:
 
 link:https://gitter.im/apache/james-project[image:https://badges.gitter.im/apache/james-project.svg[Join the chat at link:https://gitter.im/apache/james-project]]
 
@@ -40,26 +38,27 @@ There is many other ways one can help us: packaging, communication, etc ...
 
 == Table of contents
 
- * link:#_how_to_try_james[How to try James]
- * link:#_how_to_check_the_compilation[How to check the compilation]
- * link:#_how_to_run_james_in_docker[How to run James in Docker]
- ** link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
- ** link:#_run_james_with_guice_cassandra_elasticsearch[Run James with Guice + Cassandra + ElasticSearch]
- ** link:#_run_james_with_guice_jpa_lucene[Run James with Guice + JPA + Lucene]
- ** link:#_run_james_with_spring_jpa[Run James with Spring + JPA]
- * link:#_other_useful_commands[Other Useful commands]
- ** link:#_how_to_add_a_domain_[How to add a domain?]
- ** link:#_how_to_add_a_user_[How to add a user?]
- ** link:#_how_to_manage_sieve_scripts_[How to manage SIEVE scripts?]
- ** link:#_how_to_retrieve_users_and_password_from_my_previous_container[How to retrieve users and password from my previous container?]
- * link:#_develop_on_james[Develop on James]
- ** link:#_how_to_build_james[How to build James]
- ** link:#_how_to_run_deployment_tests[How to run deployment Tests]
- ** link:#_how_to_check_the_merge_of_a_commit[How to check the merge of a commit]
- * link:#_generating_a_package_for_james[Generating a package for James]
- * link:#_know_more_about_james_design[Know more about James design]
- * link:#_articles_for_james_community[Articles for James community]
+* link:#how-to-try-james[How to try James]
+* link:#_how_to_check_the_compilation[How to check the compilation]
+* link:#_how_to_run_james_in_docker[How to run James in Docker]
+** link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
+** link:#_run_james_with_guice_cassandra_elasticsearch[Run James with Guice + Cassandra + ElasticSearch]
+** link:#_run_james_with_guice_jpa_lucene[Run James with Guice + JPA + Lucene]
+** link:#_run_james_with_spring_jpa[Run James with Spring + JPA]
+* link:#_other_useful_commands[Other Useful commands]
+** link:#_how_to_add_a_domain_[How to add a domain?]
+** link:#_how_to_add_a_user_[How to add a user?]
+** link:#_how_to_manage_sieve_scripts_[How to manage SIEVE scripts?]
+** link:#_how_to_retrieve_users_and_password_from_my_previous_container[How to retrieve users and password from my previous container?]
+* link:#_develop_on_james[Develop on James]
+** link:#_how_to_build_james[How to build James]
+** link:#_how_to_run_deployment_tests[How to run deployment Tests]
+** link:#_how_to_check_the_merge_of_a_commit[How to check the merge of a commit]
+* link:#_generating_a_package_for_james[Generating a package for James]
+* link:#_know_more_about_james_design[Know more about James design]
+* link:#_articles_for_james_community[Articles for James community]
 
+[#how-to-try-james]
 == How to try James
 
 Requirements: docker & docker-compose installed.
@@ -76,15 +75,15 @@ Then, you just have to start the services:
 
     $ docker-compose up
 
-Wait a few seconds in order to have all those services start up. You will see the following log when James is available:
-james           | Started : true
+Wait a few seconds in order to have all those services start up.You will see the following log when James is available:
+james | Started : true
 
-A default domain, james.local, has been created. You can see this by running:
+A default domain, james.local, has been created.You can see this by running:
 
     $ docker exec james java -jar /root/james-cli.jar -h 127.0.0.1 -p 9999 listdomains
 
 James will respond to IMAP port 143 and SMTP port 25.
-You have to create users before playing with james. You may also want to create other domains.
+You have to create users before playing with james.You may also want to create other domains.
 Follow the 'Useful commands' section for more information about James CLI.
 
 
@@ -131,12 +130,13 @@ If you are using a a fresh installation of Docker, your DOCKER_HOST should be un
 
 This feature is available for three configurations :
 
- * link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
- * link:#_run_james_with_guice_cassandra_elasticsearch[Guice + Cassandra + ElasticSearch]
- * link:#_run_james_with_guice_jpa_lucene[Guice + JPA + Lucene]
- * link:#_run_james_with_spring_jpa[Spring + JPA]
+* link:#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch[Guice + Cassandra + RabbitMQ + S3 + ElasticSearch]
+* link:#_run_james_with_guice_cassandra_elasticsearch[Guice + Cassandra + ElasticSearch]
+* link:#_run_james_with_guice_jpa_lucene[Guice + JPA + Lucene]
+* link:#_run_james_with_spring_jpa[Spring + JPA]
 
 
+[#_run_james_with_guice_cassandra_rabbitmq_s3_elasticsearch]
 === Run James with Guice + Cassandra + RabbitMQ + S3 + ElasticSearch
 
 
