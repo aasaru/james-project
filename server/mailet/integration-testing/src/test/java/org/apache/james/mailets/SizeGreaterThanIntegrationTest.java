@@ -27,6 +27,7 @@ import static org.apache.james.mailets.configuration.Constants.RECIPIENT;
 import static org.apache.james.mailets.configuration.Constants.awaitAtMostOneMinute;
 
 import org.apache.james.MemoryJamesServerMain;
+import org.apache.james.core.builder.MimeMessageBuilder;
 import org.apache.james.mailets.configuration.CommonProcessors;
 import org.apache.james.mailets.configuration.MailetConfiguration;
 import org.apache.james.mailets.configuration.MailetContainer;
@@ -41,6 +42,7 @@ import org.apache.james.utils.DataProbeImpl;
 import org.apache.james.utils.MailRepositoryProbeImpl;
 import org.apache.james.utils.SMTPMessageSender;
 import org.apache.james.utils.TestIMAPClient;
+import org.apache.mailet.base.test.FakeMail;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -92,13 +94,32 @@ public class SizeGreaterThanIntegrationTest {
 
     @Test
     public void mailShouldBeDeliveredWhenSizeWithinLimit() throws Exception {
-        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
-            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(950));
+        String messageText = "01234567\r\n".repeat(1000);
 
-        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
-            .login(RECIPIENT, PASSWORD)
-            .select(TestIMAPClient.INBOX)
-            .awaitMessage(awaitAtMostOneMinute);
+        MimeMessageBuilder message = MimeMessageBuilder.mimeMessageBuilder()
+             .setText(messageText);
+
+        FakeMail mail = FakeMail.builder()
+             .name("mail")
+             .mimeMessage(message)
+             .sender(SENDER)
+             .recipient(RECIPIENT)
+             .build();
+
+        System.out.println("Message size is " + mail.getMessageSize());
+
+        if (mail.getMessageSize() > 10240) {
+            throw new RuntimeException("too big");
+        }
+        else {
+            messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+                 .sendMessage(mail);
+
+            testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+                 .login(RECIPIENT, PASSWORD)
+                 .select(TestIMAPClient.INBOX)
+                 .awaitMessage(awaitAtMostOneMinute);
+        }
     }
 
     private MailetContainer.Builder generateMailetContainerConfiguration() {
