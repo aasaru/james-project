@@ -37,6 +37,7 @@ import org.apache.james.mailbox.cassandra.mail.CassandraMailboxCounterDAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraMailboxDAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraMailboxPathDAOImpl;
 import org.apache.james.mailbox.cassandra.mail.CassandraMailboxPathV2DAO;
+import org.apache.james.mailbox.cassandra.mail.CassandraMailboxPathV3DAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraMailboxRecentsDAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraMessageDAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraMessageIdDAO;
@@ -44,6 +45,7 @@ import org.apache.james.mailbox.cassandra.mail.CassandraMessageIdToImapUidDAO;
 import org.apache.james.mailbox.cassandra.mail.CassandraModSeqProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraUidProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraUserMailboxRightsDAO;
+import org.apache.james.mailbox.cassandra.mail.task.RecomputeMailboxCountersService;
 import org.apache.james.mailbox.cassandra.modules.CassandraSubscriptionModule;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,6 +76,7 @@ class CassandraSubscriptionManagerTest implements SubscriptionManagerContract {
         CassandraMailboxDAO mailboxDAO = null;
         CassandraMailboxPathDAOImpl mailboxPathDAO = null;
         CassandraMailboxPathV2DAO mailboxPathV2DAO = null;
+        CassandraMailboxPathV3DAO mailboxPathV3DAO = null;
         CassandraFirstUnseenDAO firstUnseenDAO = null;
         CassandraApplicableFlagDAO applicableFlagDAO = null;
         CassandraDeletedMessageDAO deletedMessageDAO = null;
@@ -86,6 +89,7 @@ class CassandraSubscriptionManagerTest implements SubscriptionManagerContract {
         CassandraUidProvider uidProvider = null;
         CassandraModSeqProvider modSeqProvider = null;
         CassandraSchemaVersionManager versionManager = null;
+        RecomputeMailboxCountersService recomputeMailboxCountersService = null;
 
         subscriptionManager = new StoreSubscriptionManager(
             new CassandraMailboxSessionMapperFactory(
@@ -100,6 +104,7 @@ class CassandraSubscriptionManagerTest implements SubscriptionManagerContract {
                 mailboxDAO,
                 mailboxPathDAO,
                 mailboxPathV2DAO,
+                mailboxPathV3DAO,
                 firstUnseenDAO,
                 applicableFlagDAO,
                 attachmentDAOV2,
@@ -110,6 +115,7 @@ class CassandraSubscriptionManagerTest implements SubscriptionManagerContract {
                 aclMapper,
                 userMailboxRightsDAO,
                 versionManager,
+                recomputeMailboxCountersService,
                 CassandraUtils.WITH_DEFAULT_CONFIGURATION,
                 CassandraConfiguration.DEFAULT_CONFIGURATION));
     }
