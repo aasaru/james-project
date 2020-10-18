@@ -33,7 +33,9 @@ import org.apache.james.mailets.configuration.MailetContainer;
 import org.apache.james.mailets.configuration.ProcessorConfiguration;
 import org.apache.james.modules.protocols.ImapGuiceProbe;
 import org.apache.james.modules.protocols.SmtpGuiceProbe;
+import org.apache.james.transport.mailets.LocalDelivery;
 import org.apache.james.transport.mailets.ToRepository;
+import org.apache.james.transport.matchers.RecipientIs;
 import org.apache.james.transport.matchers.SizeGreaterThan;
 import org.apache.james.utils.DataProbeImpl;
 import org.apache.james.utils.MailRepositoryProbeImpl;
@@ -91,7 +93,7 @@ public class SizeGreaterThanIntegrationTest {
     @Test
     public void mailShouldBeDeliveredWhenSizeWithinLimit() throws Exception {
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
-            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(1000));
+            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(950));
 
         testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
             .login(RECIPIENT, PASSWORD)
@@ -109,6 +111,10 @@ public class SizeGreaterThanIntegrationTest {
                                 .mailet(ToRepository.class)
                                 .addProperty("repositoryPath", ERROR_REPOSITORY.asString())
                                 .addProperty("passThrough", "false"))
+                     .addMailet(MailetConfiguration.builder()
+                          .matcher(RecipientIs.class)
+                          .matcherCondition(RECIPIENT)
+                          .mailet(LocalDelivery.class))
                         .addMailetsFrom(CommonProcessors.deliverOnlyTransport()));
     }
 }
