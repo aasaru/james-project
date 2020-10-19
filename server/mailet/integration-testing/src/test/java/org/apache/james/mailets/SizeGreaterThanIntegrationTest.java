@@ -83,7 +83,7 @@ public class SizeGreaterThanIntegrationTest {
         jamesServer.shutdown();
     }
 
-    //@Test
+    @Test
     public void mailShouldGoToErrorRepositoryWhenSizeExceeded() throws Exception {
 
         messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
@@ -93,33 +93,44 @@ public class SizeGreaterThanIntegrationTest {
     }
 
     @Test
+    public void mailShouldBeDeliveredWhenSizeWithinLimit950() throws Exception {
+        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(950));
+
+        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+            .login(RECIPIENT, PASSWORD)
+            .select(TestIMAPClient.INBOX)
+            .awaitMessage(awaitAtMostOneMinute);
+    }
+    @Test
+    public void mailShouldBeDeliveredWhenSizeWithinLimit975() throws Exception {
+        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(975));
+
+        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+            .login(RECIPIENT, PASSWORD)
+            .select(TestIMAPClient.INBOX)
+            .awaitMessage(awaitAtMostOneMinute);
+    }
+    @Test
+    public void mailShouldBeDeliveredWhenSizeWithinLimit990() throws Exception {
+        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(990));
+
+        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+            .login(RECIPIENT, PASSWORD)
+            .select(TestIMAPClient.INBOX)
+            .awaitMessage(awaitAtMostOneMinute);
+    }
+    @Test
     public void mailShouldBeDeliveredWhenSizeWithinLimit() throws Exception {
-        String messageText = "01234567\r\n".repeat(1000);
+        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(1000));
 
-        MimeMessageBuilder message = MimeMessageBuilder.mimeMessageBuilder()
-             .setText(messageText);
-
-        FakeMail mail = FakeMail.builder()
-             .name("mail")
-             .mimeMessage(message)
-             .sender(SENDER)
-             .recipient(RECIPIENT)
-             .build();
-
-        System.out.println("Message size is " + mail.getMessageSize());
-
-        if (mail.getMessageSize() > 10240) {
-            throw new RuntimeException("too big");
-        }
-        else {
-            messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
-                 .sendMessage(mail);
-
-            testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
-                 .login(RECIPIENT, PASSWORD)
-                 .select(TestIMAPClient.INBOX)
-                 .awaitMessage(awaitAtMostOneMinute);
-        }
+        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+            .login(RECIPIENT, PASSWORD)
+            .select(TestIMAPClient.INBOX)
+            .awaitMessage(awaitAtMostOneMinute);
     }
 
     private MailetContainer.Builder generateMailetContainerConfiguration() {
@@ -132,10 +143,10 @@ public class SizeGreaterThanIntegrationTest {
                                 .mailet(ToRepository.class)
                                 .addProperty("repositoryPath", ERROR_REPOSITORY.asString())
                                 .addProperty("passThrough", "false"))
-                     .addMailet(MailetConfiguration.builder()
-                          .matcher(RecipientIs.class)
-                          .matcherCondition(RECIPIENT)
-                          .mailet(LocalDelivery.class))
+//                     .addMailet(MailetConfiguration.builder()
+//                          .matcher(RecipientIs.class)
+//                          .matcherCondition(RECIPIENT)
+//                          .mailet(LocalDelivery.class))
                         .addMailetsFrom(CommonProcessors.deliverOnlyTransport()));
     }
 }
