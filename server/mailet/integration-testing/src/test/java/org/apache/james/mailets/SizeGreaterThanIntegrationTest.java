@@ -143,10 +143,10 @@ public class SizeGreaterThanIntegrationTest {
                                 .mailet(ToRepository.class)
                                 .addProperty("repositoryPath", ERROR_REPOSITORY.asString())
                                 .addProperty("passThrough", "false"))
-//                     .addMailet(MailetConfiguration.builder()
-//                          .matcher(RecipientIs.class)
-//                          .matcherCondition(RECIPIENT)
-//                          .mailet(LocalDelivery.class))
+                     .addMailet(MailetConfiguration.builder()
+                          .matcher(RecipientIs.class)
+                          .matcherCondition(RECIPIENT)
+                          .mailet(LocalDelivery.class))
                         .addMailetsFrom(CommonProcessors.deliverOnlyTransport()));
     }
 }
