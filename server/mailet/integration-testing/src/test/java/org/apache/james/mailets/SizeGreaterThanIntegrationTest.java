@@ -122,16 +122,16 @@ public class SizeGreaterThanIntegrationTest {
             .select(TestIMAPClient.INBOX)
             .awaitMessage(awaitAtMostOneMinute);
     }
-    @Test
-    public void mailShouldBeDeliveredWhenSizeWithinLimit() throws Exception {
-        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
-            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(1000));
-
-        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
-            .login(RECIPIENT, PASSWORD)
-            .select(TestIMAPClient.INBOX)
-            .awaitMessage(awaitAtMostOneMinute);
-    }
+//    @Test
+//    public void mailShouldBeDeliveredWhenSizeWithinLimit() throws Exception {
+//        messageSender.connect(LOCALHOST_IP, jamesServer.getProbe(SmtpGuiceProbe.class).getSmtpPort())
+//            .sendMessageWithHeaders(SENDER, RECIPIENT, "01234567\r\n".repeat(1000));
+//
+//        testIMAPClient.connect(LOCALHOST_IP, jamesServer.getProbe(ImapGuiceProbe.class).getImapPort())
+//            .login(RECIPIENT, PASSWORD)
+//            .select(TestIMAPClient.INBOX)
+//            .awaitMessage(awaitAtMostOneMinute);
+//    }
 
     private MailetContainer.Builder generateMailetContainerConfiguration() {
         return TemporaryJamesServer.defaultMailetContainerConfiguration()
