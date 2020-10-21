@@ -37,6 +37,7 @@ import org.apache.james.metrics.tests.RecordingMetricFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import reactor.rabbitmq.QueueSpecification;
@@ -68,6 +69,7 @@ class RabbitMQEventBusDeadLetterQueueUpgradeTest {
         eventBus.stop();
     }
 
+    @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
     @Test
     void eventBusShouldStartWhenDeadLetterUpgradeWasNotPerformed() {
         GroupA registeredGroup = new GroupA();
