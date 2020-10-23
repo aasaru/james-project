@@ -591,6 +591,7 @@ class CassandraMailboxMapperTest {
             }));
         }
 
+        @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
         @Test
         void createAfterPreviousDeleteOnFailedCreateShouldCreateAMailbox(CassandraCluster cassandra) {
             cassandra.getConf()
