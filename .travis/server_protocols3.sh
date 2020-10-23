@@ -30,7 +30,7 @@ PING_LOOP_PID=$!
 # Actual commands to run tests
 
 # We need mailbox-test artifact
-( cd $ROOTDIR/mailbox && ../mvnw install >> $BUILD_OUTPUT 2>&1 )
+#( cd $ROOTDIR/mailbox && ../mvnw --no-transfer-progress install >> $BUILD_OUTPUT 2>&1 )
 
 ( cd $ROOTDIR/server/protocols/webadmin && ../../../mvnw --no-transfer-progress test >> $BUILD_OUTPUT 2>&1 )
 

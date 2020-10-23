@@ -78,6 +78,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import com.github.fge.lambdas.Throwing;
@@ -581,6 +582,7 @@ public class CassandraMailboxManagerTest extends MailboxManagerTest<CassandraMai
             });
         }
 
+        @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
         @Test
         void deleteMailboxShouldCleanupACLWhenRightsDeleteFails(CassandraCluster cassandraCluster) throws Exception {
             mailboxManager.setRights(inboxId, new MailboxACL(
