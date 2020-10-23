@@ -57,6 +57,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import com.github.fge.lambdas.Throwing;
@@ -280,6 +281,7 @@ class CassandraMailboxMapperTest {
                 }));
             }
 
+            @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
             @Test
             void orphanMailboxIdEntriesCanNotBeReadRepaired() {
                 mailboxDAO.save(MAILBOX)

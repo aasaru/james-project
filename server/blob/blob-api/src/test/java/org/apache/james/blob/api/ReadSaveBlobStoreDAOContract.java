@@ -41,6 +41,7 @@ import java.util.stream.Stream;
 
 import org.apache.james.util.concurrency.ConcurrentTestRunner;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -339,6 +340,7 @@ public interface ReadSaveBlobStoreDAOContract {
             .runSuccessfullyWithin(Duration.ofMinutes(2));
     }
 
+    @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
     @ParameterizedTest(name = "[{index}] {0}")
     @MethodSource("blobs")
     default void concurrentSaveByteSourceShouldReturnConsistentValues(String description, byte[] bytes) throws ExecutionException, InterruptedException {

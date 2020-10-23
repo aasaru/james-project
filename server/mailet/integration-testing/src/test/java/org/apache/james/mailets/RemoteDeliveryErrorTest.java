@@ -62,6 +62,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -226,6 +227,7 @@ public class RemoteDeliveryErrorTest {
             .contains(BOUNCE_MESSAGE);
     }
 
+    @DisabledIfEnvironmentVariable(named = "TRAVIS", matches = "true")
     @Test
     public void remoteDeliveryShouldNotRetryWhenRCPT500() throws Exception {
         mockSMTP1Configuration
